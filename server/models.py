@@ -1,6 +1,6 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
-
+from sqlalchemy_serializer import SerializerMixin
 from config import db
 
 # Models go here!
@@ -16,6 +16,8 @@ class House(db.Model, SerializerMixin):
     students = db.relationship(
         'Student', backref='house', cascade='all, delete')
 
+    serialize_rules = ('-students.house',)
+
 
 class Wand(db.Model, SerializerMixin):
     __tablename__ = 'wands'
@@ -25,6 +27,12 @@ class Wand(db.Model, SerializerMixin):
     core = db.Column(db.String)
     length = db.Column(db.Integer)
 
+    student_id = db.Column(db.Integer, db.ForeignKey('students.id'))
+
+    student = db.relationship('Student', backref='wand')
+
+    serialize_rules = ('-students.wand',)
+
 
 class Pet(db.Model, SerializerMixin):
     __tablename__ = 'pets'
@@ -32,6 +40,11 @@ class Pet(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     type = db.Column(db.String)
+    student_id = db.Column(db.Integer, db.ForeignKey('students.id'))
+
+    student = db.relationship('Student', backref='pet')
+
+    serialize_rules = ('-students.pet')
 
 
 class Student(db.Model, SerializerMixin):
@@ -44,4 +57,5 @@ class Student(db.Model, SerializerMixin):
     pet_id = db.Column(db.Integer, db.ForeignKey('pets.id'))
 
     wand = db.relationship('Wand', backref='student', cascade='all, delete')
-    pet = db.relationship('Pet', backref='student', cascade='all,delete')
+    pet = db.relationship('Pet', backref='student',
+                          cascade='all,delete-orphan')
