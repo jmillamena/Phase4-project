@@ -12,6 +12,10 @@ class House(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
 
+    # house has many students
+    students = db.relationship(
+        'Student', backref='house', cascade='all, delete')
+
 
 class Wand(db.Model, SerializerMixin):
     __tablename__ = 'wands'
@@ -38,3 +42,6 @@ class Student(db.Model, SerializerMixin):
     house_id = db.Column(db.Integer, db.ForeignKey('houses.id'))
     wand_id = db.Column(db.Integer, db.ForeignKey('wands.id'))
     pet_id = db.Column(db.Integer, db.ForeignKey('pets.id'))
+
+    wand = db.relationship('Wand', backref='student', cascade='all, delete')
+    pet = db.relationship('Pet', backref='student', cascade='all,delete')
