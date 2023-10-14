@@ -26,6 +26,15 @@ class House(db.Model, SerializerMixin):
 
     serialize_rules = ('-students.house',)
 
+    @validates('name')
+    def validate_name(self, key, name):
+        valid_house_names = ['Gryffindor',
+                             'Slytherin', 'Hufflepuff', 'Ravenclaw']
+        if name not in valid_house_names:
+            raise ValueError(
+                'Invalid house name. Choose from Gryffindor, Slytherin, Hufflepuff, or Ravenclaw')
+        return name
+
 
 class Wand(db.Model, SerializerMixin):
     __tablename__ = 'wands'
