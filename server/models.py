@@ -56,12 +56,21 @@ class Pet(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
-    type = db.Column(db.String)
+    species = db.Column(db.String)
     student_id = db.Column(db.Integer, db.ForeignKey('students.id'))
 
     student = db.relationship('Student', backref='pet')
 
     serialize_rules = ('-students.pet')
+
+    @validates('species')
+    def validate_name(self, key, species):
+        valid_pet_species = ['Owl',
+                             'Cat', 'Toad']
+        if species not in valid_pet_species:
+            raise ValueError(
+                'Invalid pet species. Choose from an Owl, Cat, or Toad')
+        return species
 
 
 class Student(db.Model, SerializerMixin):
