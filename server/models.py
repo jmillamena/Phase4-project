@@ -50,6 +50,15 @@ class Wand(db.Model, SerializerMixin):
 
     serialize_rules = ('-students.wand',)
 
+    @validates('core')
+    def validate_name(self, key, core):
+        valid_cores = ['Phoenix Feather',
+                       'Dragon Heartstring', 'Unicorn Hair']
+        if core not in valid_cores:
+            raise ValueError(
+                'Choose core from Phoenix Feather, Dragon Heartstring, or Unicorn Hair')
+        return core
+
 
 class Pet(db.Model, SerializerMixin):
     __tablename__ = 'pets'
