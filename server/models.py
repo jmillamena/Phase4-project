@@ -36,3 +36,5 @@ class Student(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     house_id = db.Column(db.Integer, db.ForeignKey('houses.id'))
+    wand_id = db.Column(db.Integer, db.ForeignKey('wands.id'))
+    pet_id = db.Column(db.Integer, db.ForeignKey('pets.id'))
