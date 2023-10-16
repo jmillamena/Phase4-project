@@ -38,7 +38,7 @@ class Houses(Resource):
         return make_response(houses, 200)
 
 
-api.add_resource(Houses, '/houses')
+api.add_resource(Houses, '/hogwarts-house')
 
 
 class Students(Resource):
@@ -47,8 +47,25 @@ class Students(Resource):
         return make_response(students, 200)
 
 
-api.add_resource(Students, '/students')
+api.add_resource(Students, '/student-list')
 
+
+class Pets(Resource):
+    def get(self):
+        pets = [pet.to_dict() for pet in Pet.query.all()]
+        return make_response(pets, 200)
+
+
+api.add_resource(Pets, '/magical-creatures')
+
+
+class Wands(Resource):
+    def get(self):
+        wands = [wand.to_dict() for wand in Wand.query.all()]
+        return make_response(wands, 200)
+
+
+api.add_resource(Wands, '/wands')
 
 # class StudentById(Resource):
 #     def get(self, id):
