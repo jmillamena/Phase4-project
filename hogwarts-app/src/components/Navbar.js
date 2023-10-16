@@ -10,9 +10,9 @@ function Navbar() {
       </h1>
         <ul id="nav-mobile" className="center">
           <li><Link to="/">Home</Link></li>
-          <li><Link to="/students">Student List</Link></li>
-          <li><Link to="/houses">Hogwarts House</Link></li>
-          <li><Link to="/creatures">Magical Creatures</Link></li>
+          <li><Link to="/student-list">Student List</Link></li>
+          <li><Link to="/hogwarts-house">Hogwarts House</Link></li>
+          <li><Link to="/magical-creatures">Magical Creatures</Link></li>
           <li><Link to="/wands">Wands</Link></li>
         </ul>
       </div>
