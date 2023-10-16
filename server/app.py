@@ -9,7 +9,7 @@ from flask_restful import Resource
 # Local imports
 from config import app, db, api
 # Add your model imports
-from models import db, House, Wand, Pet, Student
+from models import db, House, Wand, Pet, Student, Year
 
 # Views go here!
 

@@ -8,7 +8,7 @@ from faker import Faker
 
 # Local imports
 from app import app
-from models import db, House, Wand, Pet, Student
+from models import db, House, Year, Wand, Pet, Student
 
 # if __name__ == '__main__':
 #     fake = Faker()
@@ -30,6 +30,17 @@ with app.app_context():
 
     houses = [gryffindor, slytherin, hufflepuff, ravenclaw]
 
+    print("Creating Years...")
+    first = Year(year=1)
+    second = Year(year=2)
+    third = Year(year=3)
+    fourth = Year(year=4)
+    fifth = Year(year=5)
+    sixth = Year(year=6)
+    seventh = Year(year=7)
+
+    years = [first, second, third, fourth, fifth, sixth, seventh]
+
     print("Creating Wands...")
     w1 = Wand(wood="Holly", core="Phoenix Feather", length=11)
     w2 = Wand(wood="Willow", core="Unicorn Hair", length=14)
@@ -45,9 +56,12 @@ with app.app_context():
     pets = [p1, p2, p3]
 
     print("Creating Students...")
-    s1 = Student(name="Harry Potter", house=gryffindor, wand=w1, pet=p1)
-    s2 = Student(name="Ron Weasley", house=gryffindor, wand=w2, pet=p2)
-    s3 = Student(name="Oliver Scamander", house=gryffindor, wand=w3, pet=p3)
+    s1 = Student(name="Harry Potter", house=gryffindor,
+                 year=third, wand=w1, pet=p1)
+    s2 = Student(name="Ron Weasley", house=gryffindor,
+                 year=third, wand=w2, pet=p2)
+    s3 = Student(name="Oliver Scamander",
+                 house=gryffindor, year=fourth, wand=w3, pet=p3)
     students = [s1, s2]
 
     db.session.add_all(houses)
