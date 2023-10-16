@@ -8,7 +8,7 @@ from faker import Faker
 
 # Local imports
 from app import app
-from models import db, House, Year, Wand, Pet, Student
+from models import db, House, Year, Wand, Pet, Student, Subject
 
 # if __name__ == '__main__':
 #     fake = Faker()
@@ -55,19 +55,36 @@ with app.app_context():
 
     pets = [p1, p2, p3]
 
+    print("Creating Subjects...")
+    transfig = Subject(subject="Transfiguration")
+    charms = Subject(subject="Charms")
+    potions = Subject(subject="Potions")
+    hom = Subject(subject="History of Magic")
+    dada = Subject(subject="Defence Against the Dark Arts")
+    astro = Subject(subject="Astronomy")
+    herb = Subject(subject="Herbology")
+    fly = Subject(subject="Flying")
+
+    subjects = [transfig, charms, potions, hom, dada, astro, herb, fly]
+
     print("Creating Students...")
     s1 = Student(name="Harry Potter", house=gryffindor,
                  year=third, wand=w1, pet=p1)
+    s1.subjects = [fly, herb, charms, potions, dada]
     s2 = Student(name="Ron Weasley", house=gryffindor,
                  year=third, wand=w2, pet=p2)
+    s2.subjects = [potions, hom, charms, dada]
     s3 = Student(name="Oliver Scamander",
                  house=gryffindor, year=fourth, wand=w3, pet=p3)
-    students = [s1, s2]
+    s3.subjects = [fly, potions, charms, transfig, astro]
+    students = [s1, s2, s3]
 
     db.session.add_all(houses)
     db.session.add_all(wands)
     db.session.add_all(pets)
     db.session.add_all(students)
+    db.session.add_all(subjects)
+    db.session.add_all(years)
     db.session.commit()
 
     print("Seeding done!")

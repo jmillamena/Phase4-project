@@ -1,10 +1,17 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import validates
+from sqlalchemy import Table, Column, Integer, ForeignKey
 
 from config import db
 
 # Models go here!
+student_subject_association = Table(
+    'student_subject_association',
+    db.Model.metadata,
+    Column('student_id', Integer, ForeignKey('students.id')),
+    Column('subject_id', Integer, ForeignKey('subjects.id'))
+)
 
 
 class House(db.Model, SerializerMixin):
@@ -105,6 +112,27 @@ class Student(db.Model, SerializerMixin):
     pet = db.relationship('Pet', backref='student',
                           cascade='all, delete-orphan', single_parent=True)
     year = db.relationship('Year', backref='school_year')
+    subjects = db.relationship(
+        'Subject', secondary=student_subject_association, back_populates="students")
 
     def __repr__(self):
         return f'<Student {self.name}>'
+
+
+class Subject(db.Model, SerializerMixin):
+    __tablename__ = 'subjects'
+
+    id = db.Column(db.Integer, primary_key=True)
+    subject = db.Column(db.String)
+
+    enrolled_students = db.relationship(
+        'Student',
+        secondary=student_subject_association,
+        back_populates="subjects"
+    )
+
+    students = db.relationship(
+        'Student', secondary=student_subject_association, back_populates="subjects")
+
+    def __repr__(self):
+        return f'<Subject {self.subject}>'
