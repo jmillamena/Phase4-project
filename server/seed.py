@@ -32,19 +32,22 @@ with app.app_context():
 
     print("Creating Wands...")
     w1 = Wand(wood="Holly", core="Phoenix Feather", length=11)
-    w2 = Wand(wood="Willow", core="Unicore Hair", length=14)
+    w2 = Wand(wood="Willow", core="Unicorn Hair", length=14)
+    w3 = Wand(wood="Alder", core="Unicorn Hair", length=13)
 
-    wands = [w1, w2]
+    wands = [w1, w2, w3]
 
     print("Creating Pets...")
-    p1 = Pet(name="Hedwig", type="owl")
-    p2 = Pet(name="Pigwidgeon", type="owl")
+    p1 = Pet(name="Hedwig", type="Owl")
+    p2 = Pet(name="Pigwidgeon", type="Owl")
+    p3 = Pet(name="Illari", type="Owl")
 
-    pets = [p1, p2]
+    pets = [p1, p2, p3]
 
     print("Creating Students...")
     s1 = Student(name="Harry Potter", house=gryffindor, wand=w1, pet=p1)
     s2 = Student(name="Ron Weasley", house=gryffindor, wand=w2, pet=p2)
+    s3 = Student(name="Oliver Scamander", house=gryffindor, wand=w3, pet=p3)
     students = [s1, s2]
 
     db.session.add_all(houses)
