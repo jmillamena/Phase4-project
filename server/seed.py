@@ -21,6 +21,8 @@ with app.app_context():
     Wand.query.delete()
     Pet.query.delete()
     Student.query.delete()
+    Subject.query.delete()
+    Year.query.delete()
 
     print("Creating Houses...")
     gryffindor = House(name="Gryffindor")
@@ -45,15 +47,17 @@ with app.app_context():
     w1 = Wand(wood="Holly", core="Phoenix Feather", length=11)
     w2 = Wand(wood="Willow", core="Unicorn Hair", length=14)
     w3 = Wand(wood="Alder", core="Unicorn Hair", length=13)
+    w4 = Wand(wood="Hawthorn", core="Unicorn Hair", length=10)
 
-    wands = [w1, w2, w3]
+    wands = [w1, w2, w3, w4]
 
     print("Creating Pets...")
     p1 = Pet(name="Hedwig", type="Owl")
     p2 = Pet(name="Pigwidgeon", type="Owl")
     p3 = Pet(name="Illari", type="Owl")
+    p4 = Pet(name="Ulyssess", type="Owl")
 
-    pets = [p1, p2, p3]
+    pets = [p1, p2, p3, p4]
 
     print("Creating Subjects...")
     transfig = Subject(subject="Transfiguration")
@@ -77,7 +81,11 @@ with app.app_context():
     s3 = Student(name="Oliver Scamander",
                  house=gryffindor, year=fourth, wand=w3, pet=p3)
     s3.subjects = [fly, potions, charms, transfig, astro]
-    students = [s1, s2, s3]
+    s4 = Student(name="Draco Malfoy", house=slytherin,
+                 year=third, wand=w4, pet=p4)
+    s4.subjects = [fly, charms, potions, astro, dada]
+
+    students = [s1, s2, s3, s4]
 
     db.session.add_all(houses)
     db.session.add_all(wands)
