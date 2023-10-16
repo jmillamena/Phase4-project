@@ -48,8 +48,9 @@ with app.app_context():
     w2 = Wand(wood="Willow", core="Unicorn Hair", length=14)
     w3 = Wand(wood="Alder", core="Unicorn Hair", length=13)
     w4 = Wand(wood="Hawthorn", core="Unicorn Hair", length=10)
+    w5 = Wand(wood="Acacia", core="Unicorn Hair", length=13)
 
-    wands = [w1, w2, w3, w4]
+    wands = [w1, w2, w3, w4, w5]
 
     print("Creating Pets...")
     p1 = Pet(name="Hedwig", type="Owl")
@@ -84,8 +85,11 @@ with app.app_context():
     s4 = Student(name="Draco Malfoy", house=slytherin,
                  year=third, wand=w4, pet=p4)
     s4.subjects = [fly, charms, potions, astro, dada]
+    s5 = Student(name="Luna Lovegood", house=ravenclaw,
+                 year=third, wand=w5)
+    s5.subjects = [charms, hom, dada, herb, astro]
 
-    students = [s1, s2, s3, s4]
+    students = [s1, s2, s3, s4, s5]
 
     db.session.add_all(houses)
     db.session.add_all(wands)
