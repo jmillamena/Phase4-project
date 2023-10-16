@@ -12,6 +12,9 @@ class House(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
 
+    # one to many relationship with students
+    students = db.relationship('Student', backref='house')
+
     def __repr__(self):
         return f'<House {self.name}>'
 
@@ -44,6 +47,14 @@ class Student(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
+
+    house_id = db.Column(db.Integer, db.ForeignKey('houses.id'))
+    wand_id = db.Column(db.Integer, db.ForeignKey('wands.id'))
+    pet_id = db.Column(db.Integer, db.ForeignKey('pets.id'))
+
+    house = db.relationship('House', backref='students')
+    wand = db.relationship('Wand', backref='student')
+    pet = db.relationship('Pet', backref='student')
 
     def __repr__(self):
         return f'<Student {self.name}>'
