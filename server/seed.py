@@ -49,8 +49,9 @@ with app.app_context():
     w3 = Wand(wood="Alder", core="Unicorn Hair", length=13)
     w4 = Wand(wood="Hawthorn", core="Unicorn Hair", length=10)
     w5 = Wand(wood="Acacia", core="Unicorn Hair", length=13)
+    w6 = Wand(wood="Ash", core="Unicorn Hair", length=12.25)
 
-    wands = [w1, w2, w3, w4, w5]
+    wands = [w1, w2, w3, w4, w5, w6]
 
     print("Creating Pets...")
     p1 = Pet(name="Hedwig", type="Owl")
@@ -88,6 +89,8 @@ with app.app_context():
     s5 = Student(name="Luna Lovegood", house=ravenclaw,
                  year=third, wand=w5)
     s5.subjects = [charms, hom, dada, herb, astro]
+    s6 = Student(name="Cedric Diggory", house=hufflepuff, year=fifth, wand=w6)
+    s6.subjects = [fly, charms, dada, transfig]
 
     students = [s1, s2, s3, s4, s5]
 
