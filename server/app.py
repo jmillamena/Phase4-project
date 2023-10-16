@@ -13,6 +13,9 @@ from config import app, db, api
 
 # Views go here!
 
+
+
+
 @app.route('/')
 def index():
     return '<h1>Project Server</h1>'

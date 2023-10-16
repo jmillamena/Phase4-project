@@ -1,0 +1,72 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+/* Set the background color to charcoal grey */
+body {
+  background-color: #fbfcfb; /* Use a charcoal grey color code */
+  margin: 0; /* Remove default body margin */
+  padding: 0; /* Remove default body padding */
+  font-family: Arial, sans-serif; /* Set a default font family if needed */
+}
+
+/* You can also style other elements within your app here */
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Remove bullet points from the list in the Navbar */
+ul {
+  list-style: none;
+}
+
+.nav-wrapper {
+  background-color: #fbfcfb;
+  font-family: 'Blackletter', sans-serif;
+  color: #ffd700;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  padding: 0 1rem;
+}
+.nav-wrapper a {
+  color: inherit;
+  text-decoration: none;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 10px;;
+}
+.nav-wrapper li:hover {
+  background-color: rgb(120, 6, 155);
+}
+
+.home-container {
+align-items: center;
+}
+
+/* Set a background image */
+
+.title-header {
+  font-size: 2.5rem; /* Adjust the size as needed */
+  color: #e6cb32; /* Use a Harry Potter-themed color (e.g., purple) */
+  text-transform: uppercase; /* Make the text uppercase */
+  text-align: center;
+  margin: 0 auto;
+
+  /* Apply smaller font size to '3/4' and style it as an exponent */
+  .exponent {
+    font-size: 0.8rem; /* Adjust the size as needed */
+    vertical-align: super; /* Style it as an exponent */
+  }
+}
