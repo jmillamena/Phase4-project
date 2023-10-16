@@ -6,9 +6,9 @@ function Home() {
     <div className="home-container">
       
 
-      <h2 class="title">Upcoming Events</h2>
-      <p>Sample Event 1</p>
-      <p>Sample Event 2</p>
+      <h2 class="title-ue">Upcoming Events</h2>
+      <p class="event-1">Sample Event 1</p>
+      <p class="event-2">Sample Event 2</p>
       <h2>House Points Leaderboard</h2>
       <div className="house-card">
         <h3>Gryffindor</h3>

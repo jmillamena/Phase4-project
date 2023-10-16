@@ -29,10 +29,26 @@ body {
 ul {
   list-style: none;
 }
+/* styling for the event header and event content */
+.title-ue {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.event-1{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.event-2{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .nav-wrapper {
   background-color: #fbfcfb;
-  font-family: 'Blackletter', sans-serif;
+  font-family: "Blackletter", sans-serif;
   color: #ffd700;
   justify-content: space-between;
   align-items: center;
@@ -45,14 +61,14 @@ ul {
   height: 100%;
   display: flex;
   align-items: center;
-  padding: 10px;;
+  padding: 10px;
 }
 .nav-wrapper li:hover {
   background-color: rgb(120, 6, 155);
 }
 
 .home-container {
-align-items: center;
+  align-items: center;
 }
 
 /* Set a background image */
