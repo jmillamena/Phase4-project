@@ -13,7 +13,7 @@ class House(db.Model, SerializerMixin):
     name = db.Column(db.String)
 
     # one to many relationship with students
-    students = db.relationship('Student', backref='house')
+    house_students = db.relationship('Student', backref='house_relationship')
 
     def __repr__(self):
         return f'<House {self.name}>'
