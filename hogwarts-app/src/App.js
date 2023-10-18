@@ -8,8 +8,14 @@ import StudentList from "./components/StudentList";
 import HogwartsHouse from "./components/HogwartsHouse";
 import MagicalCreatures from "./components/MagicalCreatures";
 import Navbar from "./components/Navbar";
+
+
 function App() {
+  
+  
   return (
+   
+
     <Router>
       <Navbar />
       <Routes>
@@ -19,7 +25,8 @@ function App() {
         <Route path="/magical-creatures" element={<MagicalCreatures />} />
       </Routes>
     </Router>
-  );
+  )
+  
 }
 
 export default App;

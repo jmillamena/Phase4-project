@@ -52,6 +52,7 @@ function StudentList() {
         <h2>New Student Registry</h2>
         <form>
           <input type="text" placeholder="Name" />
+          
           <select>
             <option value="Gryffindor">Gryffindor</option>
             <option value="Hufflepuff">Hufflepuff</option>
@@ -60,11 +61,13 @@ function StudentList() {
           </select>
           <textarea placeholder="About Me"></textarea>
           <div className="wand-fields">
+           
             <input type="text" placeholder="Wood" />
             <input type="text" placeholder="Core" />
             <input type="text" placeholder="Length" />
           </div>
           <div className="pet-fields">
+          
             <input type="text" placeholder="Name" />
             <input type="text" placeholder="Species" />
           </div>
