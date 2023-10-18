@@ -7,7 +7,6 @@ from config import db
 
 # Models go here!
 
-from app import db
 
 # class House(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)
@@ -160,4 +159,3 @@ class Subject(db.Model, SerializerMixin):
 
     def __repr__(self):
         return f'<Subject {self.subject}>'
-
