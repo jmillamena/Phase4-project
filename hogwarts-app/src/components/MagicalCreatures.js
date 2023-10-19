@@ -1,11 +1,22 @@
 // src/components/MagicalCreatures.js
-import React from 'react';
+import React, { useState, useEffect } from "react";
 
 function MagicalCreatures() {
   // Sample data for magical creatures (you can fetch this from your API)
-  const sampleCreatures = [
-    // Sample creature data
-  ];
+  const [pets, setPets] = useState([]);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:5555/pets")
+      .then((r) => {
+        if (r.ok) {
+          return r.json();
+        }
+        throw r;
+      })
+      .then((pets) => setPets(pets));
+  }, []);
+
+  const sampleCreatures = [];
 
   return (
     <div className="container">
@@ -15,6 +26,18 @@ function MagicalCreatures() {
       </div>
 
       <h2>Types of Pets</h2>
+
+      <div className="pet-container">
+        <h2>Pets on Campus</h2>
+        <div className="pet-info">
+          {pets.map((pet, index) => (
+            <div key={index}>
+              <p>Pet Name: {pet.name}</p>
+              <p>Type: {pet.type}</p>
+            </div>
+          ))}
+        </div>
+      </div>
 
       <div className="creature-cards">
         {sampleCreatures.map((creature, index) => (

@@ -1,11 +1,25 @@
 // src/components/StudentList.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function StudentList() {
   // Sample student data (you can fetch this from your API)
   const sampleStudents = [
     // Sample student data
   ];
+
+  //Grabbing student info from API
+  const [students, setStudents] = useState([]);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:5555/students")
+      .then((r) => {
+        if (r.ok) {
+          return r.json();
+        }
+        throw r;
+      })
+      .then((students) => setStudents(students));
+  }, []);
 
   // State for search filter
   const [searchTerm, setSearchTerm] = useState("");
@@ -23,6 +37,18 @@ function StudentList() {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
+
+      <div className="students-container">
+        <h2>Students on Campus</h2>
+        <div className="students-info">
+          {students.map((student, index) => (
+            <div key={index}>
+              <p>Name: {student.name}</p>
+              <p>House: {student.house ? student.house.name : "Unknown"}</p>
+            </div>
+          ))}
+        </div>
+      </div>
 
       <div className="student-list">
         {filteredStudents.map((student) => (
@@ -52,7 +78,7 @@ function StudentList() {
         <h2>New Student Registry</h2>
         <form>
           <input type="text" placeholder="Name" />
-          
+
           <select>
             <option value="Gryffindor">Gryffindor</option>
             <option value="Hufflepuff">Hufflepuff</option>
@@ -61,13 +87,11 @@ function StudentList() {
           </select>
           <textarea placeholder="About Me"></textarea>
           <div className="wand-fields">
-           
             <input type="text" placeholder="Wood" />
             <input type="text" placeholder="Core" />
             <input type="text" placeholder="Length" />
           </div>
           <div className="pet-fields">
-          
             <input type="text" placeholder="Name" />
             <input type="text" placeholder="Species" />
           </div>

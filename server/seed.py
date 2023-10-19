@@ -8,7 +8,7 @@ from faker import Faker
 
 # Local imports
 from app import app
-from models import db, House, Year, Wand, Pet, Student, Subject
+from models import db, House, Wand, Pet, Student
 
 # if __name__ == '__main__':
 #     fake = Faker()
@@ -21,8 +21,8 @@ with app.app_context():
     Wand.query.delete()
     Pet.query.delete()
     Student.query.delete()
-    Subject.query.delete()
-    Year.query.delete()
+    # Subject.query.delete()
+    # Year.query.delete()
 
     print("Creating Houses...")
     gryffindor = House(name="Gryffindor")
@@ -32,16 +32,16 @@ with app.app_context():
 
     houses = [gryffindor, slytherin, hufflepuff, ravenclaw]
 
-    print("Creating Years...")
-    first = Year(year=1)
-    second = Year(year=2)
-    third = Year(year=3)
-    fourth = Year(year=4)
-    fifth = Year(year=5)
-    sixth = Year(year=6)
-    seventh = Year(year=7)
+    # print("Creating Years...")
+    # first = Year(year=1)
+    # second = Year(year=2)
+    # third = Year(year=3)
+    # fourth = Year(year=4)
+    # fifth = Year(year=5)
+    # sixth = Year(year=6)
+    # seventh = Year(year=7)
 
-    years = [first, second, third, fourth, fifth, sixth, seventh]
+    # years = [first, second, third, fourth, fifth, sixth, seventh]
 
     print("Creating Wands...")
     w1 = Wand(wood="Holly", core="Phoenix Feather", length=11)
@@ -61,36 +61,36 @@ with app.app_context():
 
     pets = [p1, p2, p3, p4]
 
-    print("Creating Subjects...")
-    transfig = Subject(subject="Transfiguration")
-    charms = Subject(subject="Charms")
-    potions = Subject(subject="Potions")
-    hom = Subject(subject="History of Magic")
-    dada = Subject(subject="Defence Against the Dark Arts")
-    astro = Subject(subject="Astronomy")
-    herb = Subject(subject="Herbology")
-    fly = Subject(subject="Flying")
+    # print("Creating Subjects...")
+    # transfig = Subject(subject="Transfiguration")
+    # charms = Subject(subject="Charms")
+    # potions = Subject(subject="Potions")
+    # hom = Subject(subject="History of Magic")
+    # dada = Subject(subject="Defence Against the Dark Arts")
+    # astro = Subject(subject="Astronomy")
+    # herb = Subject(subject="Herbology")
+    # fly = Subject(subject="Flying")
 
-    subjects = [transfig, charms, potions, hom, dada, astro, herb, fly]
+    # subjects = [transfig, charms, potions, hom, dada, astro, herb, fly]
 
     print("Creating Students...")
     s1 = Student(name="Harry Potter", house=gryffindor,
-                 year=third, wand=w1, pet=p1)
-    s1.subjects = [fly, herb, charms, potions, dada]
+                 wand=w1, pet=p1)
+    # s1.subjects = [fly, herb, charms, potions, dada]
     s2 = Student(name="Ron Weasley", house=gryffindor,
-                 year=third, wand=w2, pet=p2)
-    s2.subjects = [potions, hom, charms, dada]
+                 wand=w2, pet=p2)
+    # s2.subjects = [potions, hom, charms, dada]
     s3 = Student(name="Oliver Scamander",
-                 house=gryffindor, year=fourth, wand=w3, pet=p3)
-    s3.subjects = [fly, potions, charms, transfig, astro]
+                 house=gryffindor,  wand=w3, pet=p3)
+    # s3.subjects = [fly, potions, charms, transfig, astro]
     s4 = Student(name="Draco Malfoy", house=slytherin,
-                 year=third, wand=w4, pet=p4)
-    s4.subjects = [fly, charms, potions, astro, dada]
+                 wand=w4, pet=p4)
+    # s4.subjects = [fly, charms, potions, astro, dada]
     s5 = Student(name="Luna Lovegood", house=ravenclaw,
-                 year=third, wand=w5)
-    s5.subjects = [charms, hom, dada, herb, astro]
-    s6 = Student(name="Cedric Diggory", house=hufflepuff, year=fifth, wand=w6)
-    s6.subjects = [fly, charms, dada, transfig]
+                 wand=w5)
+    # s5.subjects = [charms, hom, dada, herb, astro]
+    s6 = Student(name="Cedric Diggory", house=hufflepuff,  wand=w6)
+    # s6.subjects = [fly, charms, dada, transfig]
 
     students = [s1, s2, s3, s4, s5]
 
@@ -98,8 +98,8 @@ with app.app_context():
     db.session.add_all(wands)
     db.session.add_all(pets)
     db.session.add_all(students)
-    db.session.add_all(subjects)
-    db.session.add_all(years)
+    # db.session.add_all(subjects)
+    # db.session.add_all(years)
     db.session.commit()
 
     print("Seeding done!")
