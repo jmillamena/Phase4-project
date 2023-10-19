@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 function HogwartsHouse() {
   // Sample data for Hogwarts houses (you can fetch this from your API)
   const [houses, setHouses] = useState([]);
+  // const [wands, setWands] = useState([]);
 
   useEffect(() => {
     fetch("http://127.0.0.1:5555/houses")
@@ -15,6 +16,17 @@ function HogwartsHouse() {
       })
       .then((houses) => setHouses(houses));
   }, []);
+
+  // useEffect(() => {
+  //   fetch("http://127.0.0.1:5555/wands")
+  //     .then((r) => {
+  //       if (r.ok) {
+  //         return r.json();
+  //       }
+  //       throw r;
+  //     })
+  //     .then((wands) => setWands(wands));
+  // }, []);
 
   return (
     <div className="container">
@@ -46,6 +58,19 @@ function HogwartsHouse() {
           ))}
         </div>
       </div>
+
+      {/* <div className="wand-container">
+        <h2>Wands</h2>
+        <div className="wand-info">
+          {wands.map((wand, index) => (
+            <div key={index}>
+              <p>Wood: {wand.wood}</p>
+              <p>Core: {wand.core}</p>
+              <p>Length: {wand.length}</p>
+            </div>
+          ))}
+        </div>
+      </div> */}
     </div>
   );
 }

@@ -9,7 +9,7 @@ import os
 # Local imports
 from config import app, db, api
 # Add your model imports
-from models import House
+from models import House, Wand
 
 
 @app.route('/')
@@ -45,13 +45,13 @@ api.add_resource(Houses, '/houses')
 # api.add_resource(Pets, '/magical-creatures')
 
 
-# class Wands(Resource):
-#     def get(self):
-#         wands = [wand.to_dict() for wand in Wand.query.all()]
-#         return make_response(wands, 200)
+class Wands(Resource):
+    def get(self):
+        wands = [wand.to_dict() for wand in Wand.query.all()]
+        return make_response(wands, 200)
 
 
-# api.add_resource(Wands, '/wands')
+api.add_resource(Wands, '/wands')
 
 # class StudentById(Resource):
 #     def get(self, id):

@@ -60,7 +60,7 @@ class House(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
 
-    # # one to many relationship with students
+    # one to many relationship with students
     # house_students = db.relationship('Student', backref='house_relationship')
 
     # serialize_rules = ('-students.house')
@@ -81,25 +81,25 @@ class House(db.Model, SerializerMixin):
 # House.serialize_rules = ('-house.students')
 
 
-# class Wand(db.Model, SerializerMixin):
-#     __tablename__ = 'wands'
+class Wand(db.Model, SerializerMixin):
+    __tablename__ = 'wands'
 
-#     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-#     wood = db.Column(db.String)
-#     core = db.Column(db.String)
-#     length = db.Column(db.Float)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    wood = db.Column(db.String)
+    core = db.Column(db.String)
+    length = db.Column(db.Float)
 
-#     @validates('core')
-#     def validate_core(self, key, core):
-#         valid_core_types = ["Phoenix Feather",
-#                             "Unicorn Hair", "Dragon Heartstring"]
-#         if core not in valid_core_types:
-#             raise ValueError(
-#                 "Core type must be Phoenix Feather, Unicorn Hair, or Dragon Heartstring")
-#         return core
+    @validates('core')
+    def validate_core(self, key, core):
+        valid_core_types = ["Phoenix Feather",
+                            "Unicorn Hair", "Dragon Heartstring"]
+        if core not in valid_core_types:
+            raise ValueError(
+                "Core type must be Phoenix Feather, Unicorn Hair, or Dragon Heartstring")
+        return core
 
-#     def __repr__(self):
-#         return f'<Wand {self.wood}, {self.core}, {self.length}>'
+    def __repr__(self):
+        return f'<Wand {self.wood}, {self.core}, {self.length}>'
 
 
 # class Pet(db.Model, SerializerMixin):
