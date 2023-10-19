@@ -13,22 +13,22 @@ from config import db
 # )
 
 
-# class Student(db.Model, SerializerMixin):
-#     __tablename__ = 'students'
+class Student(db.Model, SerializerMixin):
+    __tablename__ = 'students'
 
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
 
-#     house_id = db.Column(db.Integer, db.ForeignKey('houses.id'))
+    house_id = db.Column(db.Integer, db.ForeignKey('houses.id'))
 #     year_id = db.Column(db.Integer, db.ForeignKey('years.id'))
-#     wand_id = db.Column(db.Integer, db.ForeignKey('wands.id'))
-#     pet_id = db.Column(db.Integer, db.ForeignKey('pets.id'))
+    wand_id = db.Column(db.Integer, db.ForeignKey('wands.id'))
+    pet_id = db.Column(db.Integer, db.ForeignKey('pets.id'))
 
-#     house = db.relationship('House', backref='students')
-#     wand = db.relationship('Wand', backref='student', uselist=False,
-#                            cascade='all, delete-orphan', single_parent=True)
-#     pet = db.relationship('Pet', backref='student',
-#                           cascade='all, delete-orphan', single_parent=True)
+    house = db.relationship('House', backref='students')
+    wand = db.relationship('Wand', backref='student', uselist=False,
+                           cascade='all, delete-orphan')
+    pet = db.relationship('Pet', backref='student',
+                          cascade='all, delete-orphan')
 #     year = db.relationship('Year', backref='school_year')
 #     subjects = db.relationship(
 #         'Subject', secondary=student_subject_association, back_populates="students")
@@ -46,8 +46,8 @@ from config import db
 
 #         return serialized
 
-#     def __repr__(self):
-#         return f'<Student {self.name}>'
+    def __repr__(self):
+        return f'<Student {self.name}>'
 
 
 # Student.serialize_rules = (
