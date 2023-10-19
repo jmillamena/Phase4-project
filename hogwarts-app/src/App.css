@@ -3,3 +3,11 @@
 }
 /* Set the background color to charcoal grey */
 
+.student-info-card {
+  margin-bottom: 50px;
+  background-color: #f0f0f0;
+  color: #333;
+  font-size: 16px;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
