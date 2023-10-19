@@ -102,24 +102,24 @@ class Wand(db.Model, SerializerMixin):
         return f'<Wand {self.wood}, {self.core}, {self.length}>'
 
 
-# class Pet(db.Model, SerializerMixin):
-#     __tablename__ = 'pets'
+class Pet(db.Model, SerializerMixin):
+    __tablename__ = 'pets'
 
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String)
-#     type = db.Column(db.String)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    type = db.Column(db.String)
 
-#     @validates('type')
-#     def validate_pet_type(self, key, type):
-#         valid_pet_types = ["Owl",
-#                            "Cat", "Toad"]
-#         if type not in valid_pet_types:
-#             raise ValueError(
-#                 "Students may only bring an owl, a cat or a toad.")
-#         return type
+    @validates('type')
+    def validate_pet_type(self, key, type):
+        valid_pet_types = ["Owl",
+                           "Cat", "Toad"]
+        if type not in valid_pet_types:
+            raise ValueError(
+                "Students may only bring an owl, a cat or a toad.")
+        return type
 
-#     def __repr__(self):
-#         return f'<Pet {self.name}, {self.type}>'
+    def __repr__(self):
+        return f'<Pet {self.name}, {self.type}>'
 
 
 # class Year(db.Model, SerializerMixin):

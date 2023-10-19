@@ -8,7 +8,7 @@ from faker import Faker
 
 # Local imports
 from app import app
-from models import db, House, Wand
+from models import db, House, Wand, Pet
 
 # if __name__ == '__main__':
 #     fake = Faker()
@@ -18,8 +18,8 @@ from models import db, House, Wand
 with app.app_context():
     print("Deleting data...")
     House.query.delete()
-    # Wand.query.delete()
-    # Pet.query.delete()
+    Wand.query.delete()
+    Pet.query.delete()
     # Student.query.delete()
     # Subject.query.delete()
     # Year.query.delete()
@@ -53,13 +53,13 @@ with app.app_context():
 
     wands = [w1, w2, w3, w4, w5, w6]
 
-    # print("Creating Pets...")
-    # p1 = Pet(name="Hedwig", type="Owl")
-    # p2 = Pet(name="Pigwidgeon", type="Owl")
-    # p3 = Pet(name="Illari", type="Owl")
-    # p4 = Pet(name="Ulyssess", type="Owl")
+    print("Creating Pets...")
+    p1 = Pet(name="Hedwig", type="Owl")
+    p2 = Pet(name="Pigwidgeon", type="Owl")
+    p3 = Pet(name="Illari", type="Owl")
+    p4 = Pet(name="Ulyssess", type="Owl")
 
-    # pets = [p1, p2, p3, p4]
+    pets = [p1, p2, p3, p4]
 
     # print("Creating Subjects...")
     # transfig = Subject(subject="Transfiguration")
@@ -96,7 +96,7 @@ with app.app_context():
 
     db.session.add_all(houses)
     db.session.add_all(wands)
-    # db.session.add_all(pets)
+    db.session.add_all(pets)
     # db.session.add_all(students)
     # db.session.add_all(subjects)
     # db.session.add_all(years)
