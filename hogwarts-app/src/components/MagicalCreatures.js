@@ -32,7 +32,7 @@ function MagicalCreatures() {
         <div className="pet-info">
           {pets.map((pet, index) => (
             <div key={index}>
-              <p>Name: {pet.name}</p>
+              <p>Pet Name: {pet.name}</p>
               <p>Type: {pet.type}</p>
             </div>
           ))}
