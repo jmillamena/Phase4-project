@@ -54,52 +54,52 @@ from config import db
 #     '-house.students', '-subjects.students', '-year.students')
 
 
-# class House(db.Model, SerializerMixin):
-#     __tablename__ = 'houses'
+class House(db.Model, SerializerMixin):
+    __tablename__ = 'houses'
 
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
 
-#     # one to many relationship with students
-#     house_students = db.relationship('Student', backref='house_relationship')
+    # # one to many relationship with students
+    # house_students = db.relationship('Student', backref='house_relationship')
 
-#     serialize_rules = ('-students.house')
+    # serialize_rules = ('-students.house')
 
-#     @validates('name')
-#     def validate_name(self, key, name):
-#         valid_house_names = ["Gryffindor",
-#                              "Slytherin", "Hufflepuff", "Ravenclaw"]
-#         if name not in valid_house_names:
-#             raise ValueError(
-#                 "House must be either Gryffindor, Slytherin, Hufflepuff, or Ravenclaw.")
-#         return name
+    @validates('name')
+    def validate_name(self, key, name):
+        valid_house_names = ["Gryffindor",
+                             "Slytherin", "Hufflepuff", "Ravenclaw"]
+        if name not in valid_house_names:
+            raise ValueError(
+                "House must be either Gryffindor, Slytherin, Hufflepuff, or Ravenclaw.")
+        return name
 
-#     def __repr__(self):
-#         return f'<House {self.name}>'
+    def __repr__(self):
+        return f'<House {self.name}>'
 
 
 # House.serialize_rules = ('-house.students')
 
 
-class Wand(db.Model, SerializerMixin):
-    __tablename__ = 'wands'
+# class Wand(db.Model, SerializerMixin):
+#     __tablename__ = 'wands'
 
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    wood = db.Column(db.String)
-    core = db.Column(db.String)
-    length = db.Column(db.Float)
+#     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+#     wood = db.Column(db.String)
+#     core = db.Column(db.String)
+#     length = db.Column(db.Float)
 
-    @validates('core')
-    def validate_core(self, key, core):
-        valid_core_types = ["Phoenix Feather",
-                            "Unicorn Hair", "Dragon Heartstring"]
-        if core not in valid_core_types:
-            raise ValueError(
-                "Core type must be Phoenix Feather, Unicorn Hair, or Dragon Heartstring")
-        return core
+#     @validates('core')
+#     def validate_core(self, key, core):
+#         valid_core_types = ["Phoenix Feather",
+#                             "Unicorn Hair", "Dragon Heartstring"]
+#         if core not in valid_core_types:
+#             raise ValueError(
+#                 "Core type must be Phoenix Feather, Unicorn Hair, or Dragon Heartstring")
+#         return core
 
-    def __repr__(self):
-        return f'<Wand {self.wood}, {self.core}, {self.length}>'
+#     def __repr__(self):
+#         return f'<Wand {self.wood}, {self.core}, {self.length}>'
 
 
 # class Pet(db.Model, SerializerMixin):

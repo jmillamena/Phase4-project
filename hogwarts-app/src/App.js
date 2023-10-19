@@ -13,7 +13,7 @@ function App() {
   const [data, setData] = useState(null);
   // code for adding a GET request to the Flask API endpoint
   useEffect(() => {
-    fetch("http://127.0.0.1:5555/students")
+    fetch("http://127.0.0.1:5555/wands")
       .then((response) => response.json())
       .then((responseData) => {
         setData(responseData);

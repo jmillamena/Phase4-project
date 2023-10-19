@@ -8,7 +8,7 @@ from faker import Faker
 
 # Local imports
 from app import app
-from models import db, Wand
+from models import db, House
 
 # if __name__ == '__main__':
 #     fake = Faker()
@@ -17,20 +17,20 @@ from models import db, Wand
 #         # Seed code goes here!
 with app.app_context():
     print("Deleting data...")
-    # House.query.delete()
-    Wand.query.delete()
+    House.query.delete()
+    # Wand.query.delete()
     # Pet.query.delete()
     # Student.query.delete()
     # Subject.query.delete()
     # Year.query.delete()
 
-    # print("Creating Houses...")
-    # gryffindor = House(name="Gryffindor")
-    # slytherin = House(name="Slytherin")
-    # hufflepuff = House(name="Hufflepuff")
-    # ravenclaw = House(name="Ravenclaw")
+    print("Creating Houses...")
+    gryffindor = House(name="Gryffindor")
+    slytherin = House(name="Slytherin")
+    hufflepuff = House(name="Hufflepuff")
+    ravenclaw = House(name="Ravenclaw")
 
-    # houses = [gryffindor, slytherin, hufflepuff, ravenclaw]
+    houses = [gryffindor, slytherin, hufflepuff, ravenclaw]
 
     # print("Creating Years...")
     # first = Year(year=1)
@@ -43,15 +43,15 @@ with app.app_context():
 
     # years = [first, second, third, fourth, fifth, sixth, seventh]
 
-    print("Creating Wands...")
-    w1 = Wand(wood="Holly", core="Phoenix Feather", length=11)
-    w2 = Wand(wood="Willow", core="Unicorn Hair", length=14)
-    w3 = Wand(wood="Alder", core="Unicorn Hair", length=13)
-    w4 = Wand(wood="Hawthorn", core="Unicorn Hair", length=10)
-    w5 = Wand(wood="Acacia", core="Unicorn Hair", length=13)
-    w6 = Wand(wood="Ash", core="Unicorn Hair", length=12.25)
+    # print("Creating Wands...")
+    # w1 = Wand(wood="Holly", core="Phoenix Feather", length=11)
+    # w2 = Wand(wood="Willow", core="Unicorn Hair", length=14)
+    # w3 = Wand(wood="Alder", core="Unicorn Hair", length=13)
+    # w4 = Wand(wood="Hawthorn", core="Unicorn Hair", length=10)
+    # w5 = Wand(wood="Acacia", core="Unicorn Hair", length=13)
+    # w6 = Wand(wood="Ash", core="Unicorn Hair", length=12.25)
 
-    wands = [w1, w2, w3, w4, w5, w6]
+    # wands = [w1, w2, w3, w4, w5, w6]
 
     # print("Creating Pets...")
     # p1 = Pet(name="Hedwig", type="Owl")
@@ -95,7 +95,7 @@ with app.app_context():
     # students = [s1, s2, s3, s4, s5]
 
     db.session.add_all(houses)
-    db.session.add_all(wands)
+    # db.session.add_all(wands)
     # db.session.add_all(pets)
     # db.session.add_all(students)
     # db.session.add_all(subjects)

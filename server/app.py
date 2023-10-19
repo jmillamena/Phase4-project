@@ -9,21 +9,21 @@ import os
 # Local imports
 from config import app, db, api
 # Add your model imports
-from models import Wand
+from models import House
 
 
-# @app.route('/')
-# def index():
-#     return '<h1>Project Server</h1>'
+@app.route('/')
+def index():
+    return '<h1>Project Server</h1>'
 
 
-# class Houses(Resource):
-#     def get(self):
-#         houses = [house.to_dict() for house in House.query.all()]
-#         return make_response(houses, 200)
+class Houses(Resource):
+    def get(self):
+        houses = [house.to_dict() for house in House.query.all()]
+        return make_response(houses, 200)
 
 
-# api.add_resource(Houses, '/hogwarts-house')
+api.add_resource(Houses, '/houses')
 
 
 # class Students(Resource):
@@ -45,13 +45,13 @@ from models import Wand
 # api.add_resource(Pets, '/magical-creatures')
 
 
-class Wands(Resource):
-    def get(self):
-        wands = [wand.to_dict() for wand in Wand.query.all()]
-        return make_response(wands, 200)
+# class Wands(Resource):
+#     def get(self):
+#         wands = [wand.to_dict() for wand in Wand.query.all()]
+#         return make_response(wands, 200)
 
 
-api.add_resource(Wands, '/wands')
+# api.add_resource(Wands, '/wands')
 
 # class StudentById(Resource):
 #     def get(self, id):
