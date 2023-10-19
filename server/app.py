@@ -53,15 +53,16 @@ class Wands(Resource):
 
 api.add_resource(Wands, '/wands')
 
-# class StudentById(Resource):
-#     def get(self, id):
-#         student = Student.query.get(id)
-#         if not student:
-#             return make_response({"errors": "Student not found."})
-#         return make_response(student.to_dict(), 200)
+
+class StudentById(Resource):
+    def get(self, id):
+        student = Student.query.get(id)
+        if not student:
+            return make_response({"errors": "Student not found."})
+        return make_response(student.to_dict(), 200)
 
 
-# api.add_resource(StudentById, '/students/<int:id>')
+api.add_resource(StudentById, '/students/<int:id>')
 
 
 if __name__ == '__main__':
