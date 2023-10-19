@@ -20,7 +20,7 @@ with app.app_context():
     House.query.delete()
     Wand.query.delete()
     Pet.query.delete()
-    # Student.query.delete()
+    Student.query.delete()
     # Subject.query.delete()
     # Year.query.delete()
 
@@ -73,31 +73,31 @@ with app.app_context():
 
     # subjects = [transfig, charms, potions, hom, dada, astro, herb, fly]
 
-    # print("Creating Students...")
-    # s1 = Student(name="Harry Potter", house=gryffindor,
-    #              year=third, wand=w1, pet=p1)
+    print("Creating Students...")
+    s1 = Student(name="Harry Potter", house=gryffindor,
+                 wand=w1, pet=p1)
     # s1.subjects = [fly, herb, charms, potions, dada]
-    # s2 = Student(name="Ron Weasley", house=gryffindor,
-    #              year=third, wand=w2, pet=p2)
+    s2 = Student(name="Ron Weasley", house=gryffindor,
+                 wand=w2, pet=p2)
     # s2.subjects = [potions, hom, charms, dada]
-    # s3 = Student(name="Oliver Scamander",
-    #              house=gryffindor, year=fourth, wand=w3, pet=p3)
+    s3 = Student(name="Oliver Scamander",
+                 house=gryffindor,  wand=w3, pet=p3)
     # s3.subjects = [fly, potions, charms, transfig, astro]
-    # s4 = Student(name="Draco Malfoy", house=slytherin,
-    #              year=third, wand=w4, pet=p4)
+    s4 = Student(name="Draco Malfoy", house=slytherin,
+                 wand=w4, pet=p4)
     # s4.subjects = [fly, charms, potions, astro, dada]
-    # s5 = Student(name="Luna Lovegood", house=ravenclaw,
-    #              year=third, wand=w5)
+    s5 = Student(name="Luna Lovegood", house=ravenclaw,
+                 wand=w5)
     # s5.subjects = [charms, hom, dada, herb, astro]
-    # s6 = Student(name="Cedric Diggory", house=hufflepuff, year=fifth, wand=w6)
+    s6 = Student(name="Cedric Diggory", house=hufflepuff,  wand=w6)
     # s6.subjects = [fly, charms, dada, transfig]
 
-    # students = [s1, s2, s3, s4, s5]
+    students = [s1, s2, s3, s4, s5]
 
     db.session.add_all(houses)
     db.session.add_all(wands)
     db.session.add_all(pets)
-    # db.session.add_all(students)
+    db.session.add_all(students)
     # db.session.add_all(subjects)
     # db.session.add_all(years)
     db.session.commit()

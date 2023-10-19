@@ -9,7 +9,7 @@ import os
 # Local imports
 from config import app, db, api
 # Add your model imports
-from models import House, Wand, Pet
+from models import House, Wand, Pet, Student
 
 
 @app.route('/')
@@ -26,14 +26,14 @@ class Houses(Resource):
 api.add_resource(Houses, '/houses')
 
 
-# class Students(Resource):
-#     def get(self):
-#         students = [student.to_dict(rules=("-houses",))
-#                     for student in Student.query.all()]
-#         return make_response(students, 200)
+class Students(Resource):
+    def get(self):
+        students = [student.to_dict()
+                    for student in Student.query.all()]
+        return make_response(students, 200)
 
 
-# api.add_resource(Students, '/students')
+api.add_resource(Students, '/students')
 
 
 class Pets(Resource):

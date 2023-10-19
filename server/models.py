@@ -25,10 +25,10 @@ class Student(db.Model, SerializerMixin):
     pet_id = db.Column(db.Integer, db.ForeignKey('pets.id'))
 
     house = db.relationship('House', backref='students')
-    wand = db.relationship('Wand', backref='student', uselist=False,
-                           cascade='all, delete-orphan')
-    pet = db.relationship('Pet', backref='student',
-                          cascade='all, delete-orphan')
+    wand = db.relationship('Wand',  uselist=False)
+    pet = db.relationship('Pet', uselist=False)
+
+    serialize_rules = ("-house.student", "-house.students")
 #     year = db.relationship('Year', backref='school_year')
 #     subjects = db.relationship(
 #         'Subject', secondary=student_subject_association, back_populates="students")
