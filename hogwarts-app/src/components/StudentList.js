@@ -1,5 +1,6 @@
 // src/components/StudentList.js
 import React, { useState, useEffect } from "react";
+import "../App.css";
 
 function StudentList() {
   // Sample student data (you can fetch this from your API)
@@ -42,9 +43,19 @@ function StudentList() {
         <h2>Students on Campus</h2>
         <div className="students-info">
           {students.map((student, index) => (
-            <div key={index}>
+            <div key={index} className="student-info-card">
               <p>Name: {student.name}</p>
               <p>House: {student.house ? student.house.name : "Unknown"}</p>
+              <p>Wand </p>
+              <p> Wood: {student.wand ? student.wand.wood : "Unknown"}</p>
+              <p> Core: {student.wand ? student.wand.core : "Unknown"}</p>
+              <p> Length: {student.wand ? student.wand.length : "Unknown"}</p>
+              {student.pet && (
+                <div>
+                  <p>Pet Name: {student.pet.name}</p>
+                  <p>Pet Species: {student.pet.type}</p>
+                </div>
+              )}
             </div>
           ))}
         </div>
