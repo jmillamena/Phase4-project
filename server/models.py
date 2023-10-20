@@ -7,7 +7,8 @@ from config import db
 student_subject_association = db.Table(
     'student_subject_association',
     db.Column('student_id', db.Integer, db.ForeignKey('students.id')),
-    db.Column('subject_id', db.Integer, db.ForeignKey('subjects.id'))
+    db.Column('subject_id', db.Integer, db.ForeignKey('subjects.id')),
+    db.Column('grade', db.String(1))
 )
 
 
@@ -37,7 +38,7 @@ class Student(db.Model, SerializerMixin):
         backref='students'
     )
 
-    serialize_rules = ("-house.student", "-house.students")
+    serialize_rules = ("-house.students", "-subjects.students")
 
     def __repr__(self):
         return f'<Student {self.name}>'
