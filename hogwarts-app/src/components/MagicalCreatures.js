@@ -128,11 +128,35 @@ function MagicalCreatures() {
 
       <div className="creatures-spotted">
         <h2>Creatures Spotted</h2>
+        <p> "While exploring the Forbidden Forest, I encountered a mischievous Hinkypunk. It had one leg and carried a lantern, trying to lead us off the path. We quickly realized it was up to no good." -Anonymous</p>
         {/* Add content about creatures spotted and where to find them */}
       </div>
 
       <div className="hagrid-says">
         <h2>Hagrid Says</h2>
+        <p>"Right, now listen up, all of you! Caring for magical creatures and pets ain't nothin' to take lightly. They deserve all the love and care you can give 'em, just like any of us. Here's some advice from me heart to yours:
+<p></p>
+Feed 'Em Right: Make sure you're feedin' your creatures the right food. Hippogriffs love a good bit o' ferret, but don't try it with a Niffler. Yer'll lose your shiny things, I guarantee it!
+<p></p>
+Shelter from the Storm: Give 'em a warm and cozy home. Hippogriffs need a nice paddock, while a Fwooper might prefer a colorful cage with plenty of space.
+<p></p>
+Lots of Love: Magical creatures need love just as much as we do. Spend time with 'em, talk to 'em, and give 'em a good scratch behind the ears or tentacles, depending on the creature.
+<p></p>
+Respect Their Nature: Understand your creature's nature. Some like to play, others like to hide. A Thestral may be a bit spooky, but they're loyal and gentle creatures.
+<p></p>
+Groomin' Time: Keep 'em clean and well-groomed. Brush the fur of a Crup, keep a Kneazle's coat shiny, and never forget to water your Mandrakes (but wear earplugs when you do).
+<p></p>
+Study Up: Read about your magical creatures. There's plenty of books in the Hogwarts library to help you understand 'em better. Knowledge is power, remember!
+<p></p>
+Mind the Danger: Some creatures can be dangerous, so be extra careful. Manticores, Blast-Ended Skrewts, and Hungarian Horntails should be left to the professionals.
+<p></p>
+Don't Spook 'Em: Be gentle when you're handlin' magical creatures. Remember, they've got feelings too. Thestrals, for example, can sense your emotions.
+<p></p>
+Vet Check: Keep an eye on their health. Find a good magical creature vet who can help when your pets are feelin' under the weather.
+<p></p>
+Share the Magic: And last but not least, share the magic! Magical creatures bring joy and wonder to our world, so don't be afraid to share 'em with your friends and family. Just be sure to introduce 'em properly.
+<p></p>
+Remember, look after your creatures and pets, and they'll be loyal to you forever. That's the Hagrid way, it is!"</p>
         {/* Add advice from Hagrid on caring for pets */}
       </div>
 
