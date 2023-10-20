@@ -129,7 +129,6 @@ function StudentList() {
           {({ values, handleChange, handleBlur, handleSubmit }) => (
             <form className="form-border" onSubmit={handleSubmit}>
               <label htmlFor="name">Name: </label>
-
               <input
                 id="name"
                 name="name"
@@ -141,7 +140,6 @@ function StudentList() {
               <br />
               <br />
               <label htmlFor="house">House: </label>
-
               <Field
                 as="select"
                 name="house"
@@ -157,10 +155,8 @@ function StudentList() {
               <br />
               <br />
               <label htmlFor="wand">Wand</label>
-
               <br />
               <label htmlFor="wood">Wood: </label>
-
               <input
                 id="wood"
                 name="wood"
@@ -169,7 +165,6 @@ function StudentList() {
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-
               <br />
               <label htmlFor="core">Core: </label>
               <Field
@@ -183,34 +178,31 @@ function StudentList() {
                 <option value="Dragon Heartstring">Dragon Heartstring</option>
                 <option value="Phoenix Feather">Phoenix Feather</option>
               </Field>
-
               <br />
               <label htmlFor="length">Length: </label>
-
               <input
-                id="wood"
-                name="wood"
+                id="length"
+                name="length"
                 placeholder="Enter wand length..."
                 value={values.length}
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-
               <br />
               <br />
               <label htmlFor="pet">Pet</label>
               <br />
               <label htmlFor="petName">Name: </label>
               <input
-                id="pet"
-                name="pet"
-                placeholder="Insert pet here."
-                value={values.pet}
+                id="petName"
+                name="petName"
+                placeholder="Insert pet name here."
+                value={values.petName}
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
               <br />
-              <label htmlFor="petSpecies">Species </label>
+              <label htmlFor="petSpecies">Species: </label>
               <Field
                 as="select"
                 name="petSpecies"
