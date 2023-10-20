@@ -9,7 +9,7 @@ import os
 # Local imports
 from config import app, db, api
 # Add your model imports
-from models import House, Wand, Pet, Student, Subject
+from models import House, Wand, Pet, Student, Subject, student_subject_association
 
 
 @app.route('/')
@@ -194,6 +194,35 @@ class SubjectsList(Resource):
 
 
 api.add_resource(SubjectsList, '/subjectlist')
+
+
+class Grades(Resource):
+    def post(self):
+        grade_data = request.get_json()
+        try:
+            student_id = grade_data.get('student_id')
+            subject_id = grade_data.get('subject_id')
+            grade = grade_data.get('grade')
+
+            valid_grades = ["Outstanding", "Exceeds Expectations",
+                            "Acceptable", "Poor", "Dreadful", "Troll"]
+
+            if grade not in valid_grades:
+                return {'error': 'Invalid grade value'}, 400
+
+            db.session.execute(student_subject_association.insert().values(
+                student_id=student_id,
+                subject_id=subject_id,
+                grade=grade
+            ))
+            db.session.commit()
+            return {'message': 'Grade inserted successfully'}, 200
+
+        except Exception as e:
+            return {'error': 'Invalid data format or other error'}, 400
+
+
+api.add_resource(Grades, '/grades')
 
 
 if __name__ == '__main__':
