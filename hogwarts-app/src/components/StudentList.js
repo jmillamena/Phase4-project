@@ -106,7 +106,7 @@ function StudentList() {
       <div className="students-container">
         <h2>Students on Campus</h2>
         <div className="students-list">
-          {students.map((student, index) => (
+          {filteredStudents.map((student, index) => (
             <div key={index} className="student-info-card">
               <p>Name: {student.name}</p>
               <p>House: {student.house ? student.house.name : "Unknown"}</p>
