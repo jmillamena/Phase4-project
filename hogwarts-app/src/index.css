@@ -13,7 +13,7 @@ code {
 }
 /* Set the background color to charcoal grey */
 body {
-  background-color: #fbfcfb; /* Use a charcoal grey color code */
+  background-color: #ffffff; /* Use a charcoal grey color code */
   margin: 0; /* Remove default body margin */
   padding: 0; /* Remove default body padding */
   font-family: Arial, sans-serif; /* Set a default font family if needed */
@@ -100,10 +100,12 @@ ul {
   padding: 10px;
 }
 .nav-wrapper li:hover {
-  background-color: rgb(120, 6, 155);
+  background-color: rgb(187, 98, 63);
 }
 
-
+.eventcards{
+  display: flex;
+}
 .housecardcontainer {
 
 display: flex;
