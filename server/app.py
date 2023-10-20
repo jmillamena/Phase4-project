@@ -9,7 +9,7 @@ import os
 # Local imports
 from config import app, db, api
 # Add your model imports
-from models import House, Wand, Pet, Student
+from models import House, Wand, Pet, Student, Subject
 
 
 @app.route('/')
@@ -129,6 +129,25 @@ class StudentById(Resource):
 
 
 api.add_resource(StudentById, '/students/<int:id>')
+
+
+class Subjects(Resource):
+    def get(self):
+        subjects = [subject.to_dict() for subject in Subject.query.all()]
+        return make_response(subjects, 200)
+
+    def post(self):
+        subject_data = request.get_json()
+        try:
+            new_subject_data = Subject(**subject_data)
+        except ValueError as e:
+            return make_response({"errors": ["validations"]}, 400)
+        db.session.add(new_subject_data)
+        db.session.commit()
+        return make_response(new_subject_data.to_dict(), 200)
+
+
+api.add_resource(Subjects, '/subjects')
 
 
 if __name__ == '__main__':

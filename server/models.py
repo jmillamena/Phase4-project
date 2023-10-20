@@ -1,16 +1,14 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import validates
-from sqlalchemy import Table, Column, Integer, ForeignKey
-
+from sqlalchemy import Table, Column, Integer, ForeignKey, ForeignKeyConstraint, CheckConstraint
 from config import db
 
-# student_subject_association = Table(
-#     'student_subject_association',
-#     db.Model.metadata,
-#     Column('student_id', Integer, ForeignKey('students.id')),
-#     Column('subject_id', Integer, ForeignKey('subjects.id'))
-# )
+student_subject_association = db.Table(
+    'student_subject_association',
+    db.Column('student_id', db.Integer, db.ForeignKey('students.id')),
+    db.Column('subject_id', db.Integer, db.ForeignKey('subjects.id'))
+)
 
 
 class Student(db.Model, SerializerMixin):
@@ -20,7 +18,7 @@ class Student(db.Model, SerializerMixin):
     name = db.Column(db.String)
 
     house_id = db.Column(db.Integer, db.ForeignKey('houses.id'))
-#     year_id = db.Column(db.Integer, db.ForeignKey('years.id'))
+
     wand_id = db.Column(db.Integer, db.ForeignKey('wands.id'))
     pet_id = db.Column(db.Integer, db.ForeignKey('pets.id'))
 
@@ -28,30 +26,30 @@ class Student(db.Model, SerializerMixin):
     wand = db.relationship('Wand',  uselist=False)
     pet = db.relationship('Pet', uselist=False)
 
+    __table_args__ = (
+        ForeignKeyConstraint(['pet_id'], ['pets.id'], ondelete="CASCADE"),
+        ForeignKeyConstraint(['wand_id'], ['wands.id'], ondelete="CASCADE"),
+    )
+
+    subjects = db.relationship(
+        'Subject',
+        secondary=student_subject_association,
+        backref='students'
+    )
+
     serialize_rules = ("-house.student", "-house.students")
-#     year = db.relationship('Year', backref='school_year')
-#     subjects = db.relationship(
-#         'Subject', secondary=student_subject_association, back_populates="students")
-
-#     def custom_to_dict(self):
-#         # Initialize the dictionary
-#         serialized = {
-#             "id": self.id,
-#             "name": self.name,
-#             "year": self.year.to_dict(),
-#             "wand": self.wand.to_dict(),
-#             "pet": self.pet.to_dict(),
-#             "subjects": [subject.to_dict() for subject in self.subjects],
-#         }
-
-#         return serialized
 
     def __repr__(self):
         return f'<Student {self.name}>'
 
 
-# Student.serialize_rules = (
-#     '-house.students', '-subjects.students', '-year.students')
+class Subject(db.Model, SerializerMixin):
+    __tablename__ = 'subjects'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+
+    def __repr__(self):
+        return f'<Subject {self.name}>'
 
 
 class House(db.Model, SerializerMixin):
@@ -59,11 +57,6 @@ class House(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
-
-    # one to many relationship with students
-    # house_students = db.relationship('Student', backref='house_relationship')
-
-    # serialize_rules = ('-students.house')
 
     @validates('name')
     def validate_name(self, key, name):
@@ -76,9 +69,6 @@ class House(db.Model, SerializerMixin):
 
     def __repr__(self):
         return f'<House {self.name}>'
-
-
-# House.serialize_rules = ('-house.students')
 
 
 class Wand(db.Model, SerializerMixin):
@@ -120,40 +110,3 @@ class Pet(db.Model, SerializerMixin):
 
     def __repr__(self):
         return f'<Pet {self.name}, {self.type}>'
-
-
-# class Year(db.Model, SerializerMixin):
-#     __tablename__ = 'years'
-
-#     id = db.Column(db.Integer, primary_key=True)
-#     year = db.Column(db.Integer)
-
-#     student_year = db.relationship('Student', backref='student_year')
-
-#     @validates('year')
-#     def validate_year(self, key, year):
-#         if not 1 <= year <= 7:
-#             return ValueError("Year must be between 1 and 7 inclusive")
-#         return year
-
-#     def __repr__(self):
-#         return f'<Student {self.year}>'
-
-
-# class Subject(db.Model, SerializerMixin):
-#     __tablename__ = 'subjects'
-
-#     id = db.Column(db.Integer, primary_key=True)
-#     subject = db.Column(db.String)
-
-#     enrolled_students = db.relationship(
-#         'Student',
-#         secondary=student_subject_association,
-#         back_populates="subjects"
-#     )
-
-#     students = db.relationship(
-#         'Student', secondary=student_subject_association, back_populates="subjects")
-
-#     def __repr__(self):
-#         return f'<Subject {self.subject}>'
