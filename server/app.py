@@ -127,6 +127,41 @@ class StudentById(Resource):
         db.session.commit()
         return ("", 204)
 
+    def patch(self, id):
+        student = Student.query.get(id)
+        student_data = request.get_json()
+        if not student:
+            return make_response({"error": "Student not found."}, 404)
+
+        if 'name' in student_data:
+            student.name = student_data['name']
+
+        if 'house' in student_data:
+
+            house = House.query.filter_by(name=student_data['house']).first()
+            if house:
+                student.house = house
+            else:
+                return make_response({"error": "House not found."}, 404)
+
+        if 'wood' in student_data:
+            student.wand.wood = student_data['wood']
+
+        if 'core' in student_data:
+            student.wand.core = student_data['core']
+
+        if 'length' in student_data:
+            student.wand.length = student_data['length']
+
+        if 'petName' in student_data:
+            student.pet.name = student_data['petName']
+
+        if 'petSpecies' in student_data:
+            student.pet.type = student_data['petSpecies']
+
+        db.session.commit()
+        return make_response(student.to_dict(), 200)
+
 
 api.add_resource(StudentById, '/students/<int:id>')
 
