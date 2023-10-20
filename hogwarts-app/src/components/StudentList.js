@@ -58,6 +58,32 @@ function StudentList() {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
+
+      <div className="about">
+        <h2>About</h2>
+        <p>
+          Welcome to the Hogwarts Students List In the hallowed halls of
+          Hogwarts School of Witchcraft and Wizardry, young witches and wizards
+          from all corners of the wizarding world come together to embark on a
+          magical journey. Each student brings their unique talents,
+          backgrounds, and aspirations to this enchanted institution, creating a
+          diverse tapestry of personalities and abilities. The "Hogwarts
+          Students List" is your gateway to explore the vibrant student
+          community at Hogwarts. Here, you'll find a comprehensive collection of
+          information about the students who call this mystical castle their
+          home. From the courageous and chivalrous Gryffindors to the studious
+          and wise Ravenclaws, from the loyal Hufflepuffs to the cunning
+          Slytherins, the students of Hogwarts represent the future of the
+          wizarding world. Delve into the profiles of these remarkable young
+          witches and wizards, learning about their backgrounds, achievements,
+          and the magical qualities that define their characters. Discover the
+          friendships, rivalries, and adventures that make their time at
+          Hogwarts truly unforgettable. Whether you're a lifelong fan of the
+          wizarding world or a newcomer just setting foot in Diagon Alley, this
+          page invites you to immerse yourself in the enchanting lore of
+          Hogwarts and its extraordinary students.
+        </p>
+      </div>
       <div className="students-container">
         <h2>Students on Campus</h2>
         <div className="students-info">
@@ -96,31 +122,6 @@ function StudentList() {
             </div>
           </div>
         ))}
-      </div>
-      <div className="about">
-        <h2>About</h2>
-        <p>
-          Welcome to the Hogwarts Students List In the hallowed halls of
-          Hogwarts School of Witchcraft and Wizardry, young witches and wizards
-          from all corners of the wizarding world come together to embark on a
-          magical journey. Each student brings their unique talents,
-          backgrounds, and aspirations to this enchanted institution, creating a
-          diverse tapestry of personalities and abilities. The "Hogwarts
-          Students List" is your gateway to explore the vibrant student
-          community at Hogwarts. Here, you'll find a comprehensive collection of
-          information about the students who call this mystical castle their
-          home. From the courageous and chivalrous Gryffindors to the studious
-          and wise Ravenclaws, from the loyal Hufflepuffs to the cunning
-          Slytherins, the students of Hogwarts represent the future of the
-          wizarding world. Delve into the profiles of these remarkable young
-          witches and wizards, learning about their backgrounds, achievements,
-          and the magical qualities that define their characters. Discover the
-          friendships, rivalries, and adventures that make their time at
-          Hogwarts truly unforgettable. Whether you're a lifelong fan of the
-          wizarding world or a newcomer just setting foot in Diagon Alley, this
-          page invites you to immerse yourself in the enchanting lore of
-          Hogwarts and its extraordinary students.
-        </p>
       </div>
 
       <div className="new-student-form">
