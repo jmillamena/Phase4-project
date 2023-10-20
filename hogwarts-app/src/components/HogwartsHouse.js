@@ -1,76 +1,83 @@
-// src/components/HogwartsHouse.js
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import "../App.css";
+
+const hardCodedHouses = [
+  {
+    id: 1,
+    name: "Gryffindor",
+    founder: "Godric Gryffindor",
+    values: "Bravery, courage, chivalry",
+    commonRoom: "Gryffindor Tower",
+  },
+  {
+    id: 2,
+    name: "Hufflepuff",
+    founder: "Helga Hufflepuff",
+    values: "Hard work, patience, loyalty",
+    commonRoom: "Hufflepuff Basement",
+  },
+  {
+    id: 3,
+    name: "Ravenclaw",
+    founder: "Rowena Ravenclaw",
+    values: "Intelligence, creativity, wisdom",
+    commonRoom: "Ravenclaw Tower",
+  },
+  {
+    id: 4,
+    name: "Slytherin",
+    founder: "Salazar Slytherin",
+    values: "Ambition, cunning, leadership",
+    commonRoom: "Slytherin Dungeon",
+  },
+];
 
 function HogwartsHouse() {
-  // Sample data for Hogwarts houses (you can fetch this from your API)
-  const [houses, setHouses] = useState([]);
-  // const [wands, setWands] = useState([]);
+  const [selectedHouse, setSelectedHouse] = useState(null);
 
-  useEffect(() => {
-    fetch("http://127.0.0.1:5555/houses")
-      .then((r) => {
-        if (r.ok) {
-          return r.json();
-        }
-        throw r;
-      })
-      .then((houses) => setHouses(houses));
-  }, []);
-
-  // useEffect(() => {
-  //   fetch("http://127.0.0.1:5555/wands")
-  //     .then((r) => {
-  //       if (r.ok) {
-  //         return r.json();
-  //       }
-  //       throw r;
-  //     })
-  //     .then((wands) => setWands(wands));
-  // }, []);
+  const handleHouseClick = (house) => {
+    setSelectedHouse(house);
+  };
 
   return (
     <div className="container">
       <div className="about">
-        <h2>About</h2>
-        <p>Sample text about the Hogwarts House page.</p>
+        <h2 className="heading-about">About</h2>
+        <p className="about-house">
+          Welcome to the enchanting world of Hogwarts School of Witchcraft and
+          Wizardry! If you're here, it means the Sorting Hat has placed you into
+          one of the four esteemed houses: Gryffindor, Hufflepuff, Ravenclaw, or
+          Slytherin. Congratulations on beginning your magical journey! This
+          page is your gateway to discovering the unique qualities, values, and
+          history of each house. Whether you're a brave Gryffindor, a loyal
+          Hufflepuff, a wise Ravenclaw, or a cunning Slytherin, here is where
+          you'll find all the information you need to better understand your
+          house and the adventures that await you within its hallowed walls. So,
+          let's dive into the magic and mystique of Hogwarts houses and uncover
+          what makes your chosen house so special.
+        </p>
       </div>
 
-      <div className="house-lore">
-        <h2>House Lore</h2>
-        {/* You can add lore content here */}
+      <h2 className="heading-about">Hogwarts Houses</h2>
+      <div className="house-info">
+        {hardCodedHouses.map((house) => (
+          <div key={house.id}>
+            <p
+              onClick={() => handleHouseClick(house)}
+              style={{ cursor: "pointer" }}
+            >
+              {house.name}
+            </p>
+            {selectedHouse && selectedHouse.id === house.id && (
+              <div>
+                <p>Founder: {house.founder}</p>
+                <p>Values: {house.values}</p>
+                <p>Common Room: {house.commonRoom}</p>
+              </div>
+            )}
+          </div>
+        ))}
       </div>
-
-      <div className="container">
-        <h2>Hogwarts Houses</h2>
-        <div className="house-info">
-          {houses.map((house, index) => (
-            <div key={index}>
-              <p>Name: {house.name}</p>
-              <p>Founder: {house.founder}</p>
-              <p>House Traits: {house.traits}</p>
-              <p>Location: {house.location}</p>
-              <p>Head: {house.head}</p>
-              <p>Item: {house.item}</p>
-              <p>Famous Alumni: {house.famousAlumni}</p>
-              <p>Prefect: {house.prefect}</p>
-              <p>Mascot: {house.mascot}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* <div className="wand-container">
-        <h2>Wands</h2>
-        <div className="wand-info">
-          {wands.map((wand, index) => (
-            <div key={index}>
-              <p>Wood: {wand.wood}</p>
-              <p>Core: {wand.core}</p>
-              <p>Length: {wand.length}</p>
-            </div>
-          ))}
-        </div>
-      </div> */}
     </div>
   );
 }
