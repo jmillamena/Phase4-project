@@ -92,7 +92,11 @@ function StudentList() {
           initialValues={{
             name: "",
             house: "",
-            pet: "", // Add an initial value for "pet"
+            wood: "",
+            core: "",
+            length: "",
+            petName: "",
+            petSpecies: "",
           }}
           onSubmit={async (values) => {
             const response = await fetch("http://127.0.0.1:5555/students", {
@@ -103,7 +107,11 @@ function StudentList() {
               body: JSON.stringify({
                 name: values.name,
                 house: values.house,
-                pet: values.pet,
+                wood: values.wood,
+                core: values.core,
+                length: values.length,
+                petName: values.petName,
+                petSpecies: values.petSpecies,
               }),
             });
 
@@ -120,34 +128,79 @@ function StudentList() {
         >
           {({ values, handleChange, handleBlur, handleSubmit }) => (
             <form className="form-border" onSubmit={handleSubmit}>
-              <label htmlFor="name">Name:</label>
-              <br />
+              <label htmlFor="name">Name: </label>
+
               <input
                 id="name"
                 name="name"
-                placeholder="Insert name here."
+                placeholder="Enter name..."
                 value={values.name}
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
               <br />
-              <label htmlFor="house">House:</label>
               <br />
+              <label htmlFor="house">House: </label>
+
               <Field
                 as="select"
                 name="house"
                 onChange={handleChange}
                 onBlur={handleBlur}
               >
-                <option value="" label="Select a house" />
+                <option value="" label="Select a House" />
                 <option value="Gryffindor">Gryffindor</option>
                 <option value="Hufflepuff">Hufflepuff</option>
                 <option value="Ravenclaw">Ravenclaw</option>
                 <option value="Slytherin">Slytherin</option>
               </Field>
               <br />
+              <br />
+              <label htmlFor="wand">Wand</label>
+
+              <br />
+              <label htmlFor="wood">Wood: </label>
+
+              <input
+                id="wood"
+                name="wood"
+                placeholder="Enter wood type..."
+                value={values.wood}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+
+              <br />
+              <label htmlFor="core">Core: </label>
+              <Field
+                as="select"
+                name="core"
+                onChange={handleChange}
+                onBlur={handleBlur}
+              >
+                <option value="" label="Select a Core" />
+                <option value="Unicorn Hair">Unicorn Hair</option>
+                <option value="Dragon Heartstring">Dragon Heartstring</option>
+                <option value="Phoenix Feather">Phoenix Feather</option>
+              </Field>
+
+              <br />
+              <label htmlFor="length">Length: </label>
+
+              <input
+                id="wood"
+                name="wood"
+                placeholder="Enter wand length..."
+                value={values.length}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+
+              <br />
+              <br />
               <label htmlFor="pet">Pet</label>
               <br />
+              <label htmlFor="petName">Name: </label>
               <input
                 id="pet"
                 name="pet"
@@ -156,6 +209,19 @@ function StudentList() {
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
+              <br />
+              <label htmlFor="petSpecies">Species </label>
+              <Field
+                as="select"
+                name="petSpecies"
+                onChange={handleChange}
+                onBlur={handleBlur}
+              >
+                <option value="" label="Select a Pet" />
+                <option value="Owl">Owl</option>
+                <option value="Cat">Cat</option>
+                <option value="Toad">Toad</option>
+              </Field>
               <br />
               <button type="submit">Submit</button>
             </form>
