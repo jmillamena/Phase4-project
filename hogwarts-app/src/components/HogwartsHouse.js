@@ -70,7 +70,7 @@ function HogwartsHouse() {
               {house.name}
             </p>
             {selectedHouse && selectedHouse.id === house.id && (
-              <div>
+              <div className="house-info">
                 <p>Founder: {house.founder}</p>
                 <p>Values: {house.values}</p>
                 <p>Common Room: {house.commonRoom}</p>
