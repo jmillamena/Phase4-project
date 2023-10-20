@@ -1,6 +1,5 @@
 .App {
   text-align: center;
-  ;
 }
 /* Set the background color to charcoal grey */
 
@@ -23,4 +22,29 @@
 .form-labels {
   font-weight: bold;
   font-size: 20px;
+}
+
+.about-house {
+  margin-bottom: 50px;
+  background-color: #f0f0f0;
+  color: #333;
+  font-size: 16px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.heading-about {
+  font-weight: bold;
+  text-align: center;
+}
+
+.house-name {
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+}
+
+.house-info {
+  text-align: center;
 }
