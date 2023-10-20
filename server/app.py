@@ -35,12 +35,37 @@ class Students(Resource):
     def post(self):
         student_data = request.get_json()
         try:
-            new_student_data = Wand(**student_data)
+            # Create a new House instance and add it to the database
+            new_house = House(name=student_data["house"])
+            db.session.add(new_house)
+
+            # Create a new Pet instance and add it to the database
+            new_pet = Pet(
+                name=student_data["petName"],
+                type=student_data["petSpecies"]
+            )
+            db.session.add(new_pet)
+
+            # Create a new Wand instance and add it to the database
+            new_wand = Wand(
+                wood=student_data["wood"],
+                core=student_data["core"],
+                length=student_data["length"]
+            )
+            db.session.add(new_wand)
+
+            # Create a new Student instance and associate it with House, Pet, and Wand
+            new_student_data = Student(
+                name=student_data["name"],
+                house=new_house,
+                pet=new_pet,
+                wand=new_wand
+            )
+            db.session.add(new_student_data)
+            db.session.commit()
+            return make_response(new_student_data.to_dict(), 201)
         except ValueError as e:
             return make_response({"errors": ["validations"]}, 400)
-        db.session.add(new_student_data)
-        db.session.commit()
-        return make_response(new_student_data.to_dict(), 200)
 
 
 api.add_resource(Students, '/students')
