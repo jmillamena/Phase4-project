@@ -1,4 +1,5 @@
 // App.js
+import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -10,18 +11,18 @@ import MagicalCreatures from "./components/MagicalCreatures";
 import Navbar from "./components/Navbar";
 
 function App() {
-  const [data, setData] = useState(null);
-  // code for adding a GET request to the Flask API endpoint
-  useEffect(() => {
-    fetch("http://127.0.0.1:5555/wands")
-      .then((response) => response.json())
-      .then((responseData) => {
-        setData(responseData);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
+  // const [data, setData] = useState(null);
+  // // code for adding a GET request to the Flask API endpoint
+  // useEffect(() => {
+  //   fetch("http://127.0.0.1:5555/wands")
+  //     .then((response) => response.json())
+  //     .then((responseData) => {
+  //       setData(responseData);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching data:", error);
+  //     });
+  // }, []);
 
   return (
     <Router>

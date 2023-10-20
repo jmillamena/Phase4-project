@@ -9,7 +9,7 @@ import os
 # Local imports
 from config import app, db, api
 # Add your model imports
-from models import House, Wand, Pet, Student
+from models import House, Wand, Pet, Student, Subject
 
 
 @app.route('/')
@@ -35,9 +35,12 @@ class Students(Resource):
     def post(self):
         student_data = request.get_json()
         try:
-            # Create a new House instance and add it to the database
-            new_house = House(name=student_data["house"])
-            db.session.add(new_house)
+            house_name = student_data.get('house', '').strip()
+            house = House.query.filter_by(name=house_name).first()
+            if not house:
+                house = House(name=house_name)
+                db.session.add(house)
+                db.session.commit()
 
             # Create a new Pet instance and add it to the database
             new_pet = Pet(
@@ -57,7 +60,7 @@ class Students(Resource):
             # Create a new Student instance and associate it with House, Pet, and Wand
             new_student_data = Student(
                 name=student_data["name"],
-                house=new_house,
+                house=house,
                 pet=new_pet,
                 wand=new_wand
             )
@@ -126,6 +129,25 @@ class StudentById(Resource):
 
 
 api.add_resource(StudentById, '/students/<int:id>')
+
+
+class Subjects(Resource):
+    def get(self):
+        subjects = [subject.to_dict() for subject in Subject.query.all()]
+        return make_response(subjects, 200)
+
+    def post(self):
+        subject_data = request.get_json()
+        try:
+            new_subject_data = Subject(**subject_data)
+        except ValueError as e:
+            return make_response({"errors": ["validations"]}, 400)
+        db.session.add(new_subject_data)
+        db.session.commit()
+        return make_response(new_subject_data.to_dict(), 200)
+
+
+api.add_resource(Subjects, '/subjects')
 
 
 if __name__ == '__main__':

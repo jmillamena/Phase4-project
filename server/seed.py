@@ -8,7 +8,7 @@ from faker import Faker
 
 # Local imports
 from app import app
-from models import db, House, Wand, Pet, Student
+from models import db, House, Wand, Pet, Student, Subject
 
 # if __name__ == '__main__':
 #     fake = Faker()
@@ -21,7 +21,7 @@ with app.app_context():
     Wand.query.delete()
     Pet.query.delete()
     Student.query.delete()
-    # Subject.query.delete()
+    Subject.query.delete()
     # Year.query.delete()
 
     print("Creating Houses...")
@@ -61,17 +61,17 @@ with app.app_context():
 
     pets = [p1, p2, p3, p4]
 
-    # print("Creating Subjects...")
-    # transfig = Subject(subject="Transfiguration")
-    # charms = Subject(subject="Charms")
-    # potions = Subject(subject="Potions")
-    # hom = Subject(subject="History of Magic")
-    # dada = Subject(subject="Defence Against the Dark Arts")
-    # astro = Subject(subject="Astronomy")
-    # herb = Subject(subject="Herbology")
-    # fly = Subject(subject="Flying")
+    print("Creating Subjects...")
+    transfig = Subject(name="Transfiguration")
+    charms = Subject(name="Charms")
+    potions = Subject(name="Potions")
+    hom = Subject(name="History of Magic")
+    dada = Subject(name="Defence Against the Dark Arts")
+    astro = Subject(name="Astronomy")
+    herb = Subject(name="Herbology")
+    fly = Subject(name="Flying")
 
-    # subjects = [transfig, charms, potions, hom, dada, astro, herb, fly]
+    subjects = [transfig, charms, potions, hom, dada, astro, herb, fly]
 
     print("Creating Students...")
     s1 = Student(name="Harry Potter", house=gryffindor,
@@ -98,7 +98,7 @@ with app.app_context():
     db.session.add_all(wands)
     db.session.add_all(pets)
     db.session.add_all(students)
-    # db.session.add_all(subjects)
+    db.session.add_all(subjects)
     # db.session.add_all(years)
     db.session.commit()
 
