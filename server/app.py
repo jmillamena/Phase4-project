@@ -185,5 +185,16 @@ class Subjects(Resource):
 api.add_resource(Subjects, '/subjects')
 
 
+class SubjectsList(Resource):
+    def get(self):
+        subjects = Subject.query.all()
+        subject_data = [{'id': subject.id, 'name': subject.name}
+                        for subject in subjects]
+        return make_response(subject_data, 200)
+
+
+api.add_resource(SubjectsList, '/subjectlist')
+
+
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
