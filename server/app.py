@@ -197,6 +197,7 @@ api.add_resource(SubjectsList, '/subjectlist')
 
 
 class Grades(Resource):
+
     def post(self):
         grade_data = request.get_json()
         try:
