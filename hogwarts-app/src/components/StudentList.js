@@ -1,6 +1,7 @@
 // src/components/StudentList.js
 import React, { useState, useEffect } from "react";
 import "../App.css";
+import { Formik, Field, Form } from "formik";
 
 function StudentList() {
   // Sample student data (you can fetch this from your API)
@@ -86,28 +87,80 @@ function StudentList() {
       </div>
 
       <div className="new-student-form">
-        <h2>New Student Registry</h2>
-        <form>
-          <input type="text" placeholder="Name" />
+        <h1>Student Registry</h1>
+        <Formik
+          initialValues={{
+            name: "",
+            house: "",
+            pet: "", // Add an initial value for "pet"
+          }}
+          onSubmit={async (values) => {
+            const response = await fetch("http://127.0.0.1:5555/students", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                name: values.name,
+                house: values.house,
+                pet: values.pet,
+              }),
+            });
 
-          <select>
-            <option value="Gryffindor">Gryffindor</option>
-            <option value="Hufflepuff">Hufflepuff</option>
-            <option value="Ravenclaw">Ravenclaw</option>
-            <option value="Slytherin">Slytherin</option>
-          </select>
-          <textarea placeholder="About Me"></textarea>
-          <div className="wand-fields">
-            <input type="text" placeholder="Wood" />
-            <input type="text" placeholder="Core" />
-            <input type="text" placeholder="Length" />
-          </div>
-          <div className="pet-fields">
-            <input type="text" placeholder="Name" />
-            <input type="text" placeholder="Species" />
-          </div>
-          <button>Add Student</button>
-        </form>
+            const data = await response.json();
+
+            if (response.status === 201) {
+              // Handle successful registration
+              alert("Registration successful!");
+            } else {
+              // Handle errors
+              alert(data.message || "Registration failed.");
+            }
+          }}
+        >
+          {({ values, handleChange, handleBlur, handleSubmit }) => (
+            <form className="form-border" onSubmit={handleSubmit}>
+              <label htmlFor="name">Name:</label>
+              <br />
+              <input
+                id="name"
+                name="name"
+                placeholder="Insert name here."
+                value={values.name}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <br />
+              <label htmlFor="house">House:</label>
+              <br />
+              <Field
+                as="select"
+                name="house"
+                onChange={handleChange}
+                onBlur={handleBlur}
+              >
+                <option value="" label="Select a house" />
+                <option value="Gryffindor">Gryffindor</option>
+                <option value="Hufflepuff">Hufflepuff</option>
+                <option value="Ravenclaw">Ravenclaw</option>
+                <option value="Slytherin">Slytherin</option>
+              </Field>
+              <br />
+              <label htmlFor="pet">Pet</label>
+              <br />
+              <input
+                id="pet"
+                name="pet"
+                placeholder="Insert pet here."
+                value={values.pet}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <br />
+              <button type="submit">Submit</button>
+            </form>
+          )}
+        </Formik>
       </div>
     </div>
   );
