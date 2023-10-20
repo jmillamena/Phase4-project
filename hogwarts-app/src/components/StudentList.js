@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
 import { Formik, Field, Form } from "formik";
+import Button from "react-bootstrap/Button";
 
 function StudentList() {
   // Sample student data (you can fetch this from your API)
@@ -216,7 +217,10 @@ function StudentList() {
                 <option value="Toad">Toad</option>
               </Field>
               <br />
-              <button type="submit">Submit</button>
+              <br />
+              <Button variant="primary" type="submit" className="form-button">
+                Register
+              </Button>
             </form>
           )}
         </Formik>
