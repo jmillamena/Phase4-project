@@ -32,7 +32,7 @@ function StudentList() {
 
   return (
     <div className="container">
-      <h1>Number of Students: {filteredStudents.length}</h1>
+      <h1>Number of Students: {students.length}</h1>
       <input
         type="text"
         placeholder="Search Students"
