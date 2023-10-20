@@ -24,6 +24,25 @@ function StudentList() {
       .then((students) => setStudents(students));
   }, []);
 
+  //deleting student from DB
+
+  const handleDeleteStudent = (studentId) => {
+    fetch(`http://127.0.0.1:5555/students/${studentId}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          // Remove the deleted student from the state
+          setStudents((prevStudents) =>
+            prevStudents.filter((student) => student.id !== studentId)
+          );
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting student: ", error);
+      });
+  };
+
   // State for search filter
   const [searchTerm, setSearchTerm] = useState("");
   const filteredStudents = sampleStudents.filter((student) =>
