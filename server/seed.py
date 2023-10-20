@@ -10,11 +10,6 @@ from faker import Faker
 from app import app
 from models import db, House, Wand, Pet, Student, Subject, student_subject_association
 
-# if __name__ == '__main__':
-#     fake = Faker()
-#     with app.app_context():
-#         print("Starting seed...")
-#         # Seed code goes here!
 with app.app_context():
     print("Deleting data...")
     House.query.delete()
@@ -22,7 +17,6 @@ with app.app_context():
     Pet.query.delete()
     Student.query.delete()
     Subject.query.delete()
-    # Year.query.delete()
 
     print("Creating Houses...")
     gryffindor = House(name="Gryffindor")
@@ -31,17 +25,6 @@ with app.app_context():
     ravenclaw = House(name="Ravenclaw")
 
     houses = [gryffindor, slytherin, hufflepuff, ravenclaw]
-
-    # print("Creating Years...")
-    # first = Year(year=1)
-    # second = Year(year=2)
-    # third = Year(year=3)
-    # fourth = Year(year=4)
-    # fifth = Year(year=5)
-    # sixth = Year(year=6)
-    # seventh = Year(year=7)
-
-    # years = [first, second, third, fourth, fifth, sixth, seventh]
 
     print("Creating Wands...")
     w1 = Wand(wood="Holly", core="Phoenix Feather", length=11)
@@ -74,36 +57,58 @@ with app.app_context():
     subjects = [transfig, charms, potions, hom, dada, astro, herb, fly]
 
     print("Creating Students...")
-    s1 = Student(name="Harry Potter", house=gryffindor,
-                 wand=w1, pet=p1)
-    s2 = Student(name="Ron Weasley", house=gryffindor,
-                 wand=w2, pet=p2)
-    s3 = Student(name="Oliver Scamander",
-                 house=gryffindor,  wand=w3, pet=p3)
-    s4 = Student(name="Draco Malfoy", house=slytherin,
-                 wand=w4, pet=p4)
-    s5 = Student(name="Luna Lovegood", house=ravenclaw,
-                 wand=w5)
-    s6 = Student(name="Cedric Diggory", house=hufflepuff,  wand=w6)
+    s1 = Student(name="Harry Potter", house=gryffindor, wand=w1, pet=p1)
+    s2 = Student(name="Ron Weasley", house=gryffindor, wand=w2, pet=p2)
+    s3 = Student(name="Oliver Scamander", house=gryffindor, wand=w3, pet=p3)
+    s4 = Student(name="Draco Malfoy", house=slytherin, wand=w4, pet=p4)
+    s5 = Student(name="Luna Lovegood", house=ravenclaw, wand=w5)
+    s6 = Student(name="Cedric Diggory", house=hufflepuff, wand=w6)
 
     students = [s1, s2, s3, s4, s5, s6]
 
     students_with_subjects_and_grades = [
-        (s1, [(fly, "O"), (herb, "A"), (charms, "A"), (potions, "A"), (dada, "O")]),
-        (s2, [(potions, "A"), (hom, "A"), (charms, "E"), (dada, "E")]),
-        (s3, [(fly, "A"), (potions, "E"),
-         (charms, "O"), (transfig, "A"), (astro, "T")]),
-        (s4, [(fly, "E"), (charms, "E"), (potions, "O"), (astro, "A"), (dada, "E")]),
-        (s5, [(charms, "E"), (hom, "E"), (dada, "E"), (herb, "O"), (astro, "O")]),
-        (s6, [(fly, "O"), (charms, "E"), (dada, "E"), (transfig, "A")])
+        (s1, [(fly, "Outstanding"), (herb, "Acceptable"), (charms,
+         "Acceptable"), (potions, "Acceptable"), (dada, "Outstanding")]),
+        (s2, [(potions, "Acceptable"), (hom, "Acceptable"),
+         (charms, "Acceptable"), (dada, "Acceptable")]),
+        (s3, [(fly, "Acceptable"), (potions, "Exceeds Expectations"),
+         (charms, "Outstanding"), (transfig, "Acceptable"), (astro, "Troll")]),
+        (s4, [(fly, "Exceeds Expectations"), (charms, "Exceeds Expectations"),
+         (potions, "Outstanding"), (astro, "Acceptable"), (dada, "Exceeds Expectations")]),
+        (s5, [(charms, "Exceeds Expectations"), (hom, "Exceeds Expectations"),
+         (dada, "Exceeds Expectations"), (herb, "Outstanding"), (astro, "Outstanding")]),
+        (s6, [(fly, "Outstanding"), (charms, "Exceeds Expectations"),
+         (dada, "Exceeds Expectations"), (transfig, "Acceptable")])
     ]
+
+    db.session.add_all(houses)
+    db.session.add_all(wands)
+    db.session.add_all(pets)
+    db.session.add_all(students)
+    db.session.add_all(subjects)
+
+    # Create and execute the insert statements for grades
+    grades_data = [
+        {"grade": "Outstanding"},
+        {"grade": "Exceeds Expectations"},
+        {"grade": "Acceptable"},
+        {"grade": "Poor"},
+        {"grade": "Dreadful"},
+        {"grade": "Troll"},
+    ]
+    for data in grades_data:
+        db.session.execute(student_subject_association.insert().values(**data))
+
+    # Commit the session to save the changes to the database
+    db.session.commit()
 
     for student, subjects_with_grades in students_with_subjects_and_grades:
         student_record = Student.query.filter_by(name=student.name).first()
-
         if student_record:
+            print(f"Associating subjects and grades for {student_record.name}")
+
             for subject, grade in subjects_with_grades:
-                subject_name = subject[0].name
+                subject_name = subject.name
                 subject_record = Subject.query.filter_by(
                     name=subject_name).first()
                 if subject_record:
@@ -112,13 +117,11 @@ with app.app_context():
                         subject_id=subject_record.id,
                         grade=grade
                     ))
+                else:
+                    print(f"Subject {subject_name} not found")
+        else:
+            print(f"Student {student.name} not found")
 
-    db.session.add_all(houses)
-    db.session.add_all(wands)
-    db.session.add_all(pets)
-    db.session.add_all(students)
-    db.session.add_all(subjects)
-    # db.session.add_all(years)
     db.session.commit()
 
     print("Seeding done!")
