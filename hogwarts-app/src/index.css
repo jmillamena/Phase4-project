@@ -103,11 +103,15 @@ ul {
   background-color: rgb(120, 6, 155);
 }
 
-.home-container {
-  align-items: center;
+
+.housecardcontainer {
+
+display: flex;
+align-items: center;
+padding: 10px
+
+
 }
-
-
 
 /* Set a background image */
 
@@ -123,4 +127,7 @@ ul {
     font-size: 0.8rem; /* Adjust the size as needed */
     vertical-align: super; /* Style it as an exponent */
   }
+}
+.event-card{
+  display: flex;
 }

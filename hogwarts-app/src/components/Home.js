@@ -1,6 +1,9 @@
 // src/components/HomePage.js
 import React from "react";
 import HouseCard from "./HouseCard";
+import EventCard from "./EventCard"; 
+
+
 
 function Home() {
 
@@ -32,6 +35,23 @@ function Home() {
     // Add the other houses here...
   ];
 
+  const upcomingEvents = [
+    {
+      eventName: "Dragon Days: A Tribute to Magical Beasts",
+      date: "April 12th",
+      location: "Hogwarts School of Witchcraft and Wizardry, Forbidden Forest Clearing",
+      description:
+        "Dragon Days is an annual event held at Hogwarts, dedicated to celebrating the wonder and majesty of magical creatures, with a special emphasis on dragons. The event is organized by the Care of Magical Creatures Club and welcomes students and professors alike to explore the incredible world of these mythical beasts.",
+    },
+    {
+      eventName: "The Great Potion Palooza",
+      date: "November 15th",
+      location: "Hogwarts School of Witchcraft and Wizardry, Potions Classroom",
+      description:
+        "The Great Potion Palooza is an enchanting annual event held at Hogwarts, celebrating the art and science of potion-making. It is organized by the Hogwarts Potions Club and is open to all students, from first years to seventh years.",
+    },
+    // Add more upcoming events here...
+  ];
 
 
   return (
@@ -43,10 +63,14 @@ function Home() {
     <div className="home-container">
       
 
-      <h2 class="title-ue">Upcoming Events</h2>
-      <p class="event-1">Sample Event 1</p>
-      <p class="event-2">Sample Event 2</p>
-      <h2 class="hpl">House Points Leaderboard</h2>
+      <h2 className="title-ue">Upcoming Events</h2>
+      {upcomingEvents.map((event, index) => (
+        <EventCard key={index} {...event} />
+      ))}
+
+      
+
+      <h2 className="hpl">House Points Leaderboard</h2>
       <div className="housecardcontainer">
       {houses.map((house, index) => (
       <HouseCard key={index} {...house} />
