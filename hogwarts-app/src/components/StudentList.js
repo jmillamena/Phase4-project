@@ -93,16 +93,16 @@ function StudentList() {
                 <div>
                   <p>Pet Name: {student.pet.name}</p>
                   <p>Pet Species: {student.pet.type}</p>
-                  <button onClick={() => handleDeleteStudent(student.id)}>Delete</button>
-                  <button onClick={() => openEditForm(student)}>Edit</button>
                 </div>
               )}
+              <button onClick={() => handleDeleteStudent(student.id)}>
+                Delete
+              </button>
+              <button onClick={() => openEditForm(student)}>Edit</button>
             </div>
           ))}
         </div>
       </div>
-      
-      
 
       <div className="new-student-form">
         <h1>Student Registry</h1>
