@@ -35,9 +35,12 @@ class Students(Resource):
     def post(self):
         student_data = request.get_json()
         try:
-            # Create a new House instance and add it to the database
-            new_house = House(name=student_data["house"])
-            db.session.add(new_house)
+            house_name = student_data.get('house', '').strip()
+            house = House.query.filter_by(name=house_name).first()
+            if not house:
+                house = House(name=house_name)
+                db.session.add(house)
+                db.session.commit()
 
             # Create a new Pet instance and add it to the database
             new_pet = Pet(
@@ -57,7 +60,7 @@ class Students(Resource):
             # Create a new Student instance and associate it with House, Pet, and Wand
             new_student_data = Student(
                 name=student_data["name"],
-                house=new_house,
+                house=house,
                 pet=new_pet,
                 wand=new_wand
             )
