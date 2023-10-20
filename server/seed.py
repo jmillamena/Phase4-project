@@ -8,7 +8,7 @@ from faker import Faker
 
 # Local imports
 from app import app
-from models import db, House, Wand, Pet, Student, Subject
+from models import db, House, Wand, Pet, Student, Subject, student_subject_association
 
 # if __name__ == '__main__':
 #     fake = Faker()
@@ -76,23 +76,42 @@ with app.app_context():
     print("Creating Students...")
     s1 = Student(name="Harry Potter", house=gryffindor,
                  wand=w1, pet=p1)
-    # s1.subjects = [fly, herb, charms, potions, dada]
     s2 = Student(name="Ron Weasley", house=gryffindor,
                  wand=w2, pet=p2)
-    # s2.subjects = [potions, hom, charms, dada]
     s3 = Student(name="Oliver Scamander",
                  house=gryffindor,  wand=w3, pet=p3)
-    # s3.subjects = [fly, potions, charms, transfig, astro]
     s4 = Student(name="Draco Malfoy", house=slytherin,
                  wand=w4, pet=p4)
-    # s4.subjects = [fly, charms, potions, astro, dada]
     s5 = Student(name="Luna Lovegood", house=ravenclaw,
                  wand=w5)
-    # s5.subjects = [charms, hom, dada, herb, astro]
     s6 = Student(name="Cedric Diggory", house=hufflepuff,  wand=w6)
-    # s6.subjects = [fly, charms, dada, transfig]
 
-    students = [s1, s2, s3, s4, s5]
+    students = [s1, s2, s3, s4, s5, s6]
+
+    students_with_subjects_and_grades = [
+        (s1, [(fly, "O"), (herb, "A"), (charms, "A"), (potions, "A"), (dada, "O")]),
+        (s2, [(potions, "A"), (hom, "A"), (charms, "E"), (dada, "E")]),
+        (s3, [(fly, "A"), (potions, "E"),
+         (charms, "O"), (transfig, "A"), (astro, "T")]),
+        (s4, [(fly, "E"), (charms, "E"), (potions, "O"), (astro, "A"), (dada, "E")]),
+        (s5, [(charms, "E"), (hom, "E"), (dada, "E"), (herb, "O"), (astro, "O")]),
+        (s6, [(fly, "O"), (charms, "E"), (dada, "E"), (transfig, "A")])
+    ]
+
+    for student, subjects_with_grades in students_with_subjects_and_grades:
+        student_record = Student.query.filter_by(name=student.name).first()
+
+        if student_record:
+            for subject, grade in subjects_with_grades:
+                subject_name = subject[0].name
+                subject_record = Subject.query.filter_by(
+                    name=subject_name).first()
+                if subject_record:
+                    db.session.execute(student_subject_association.insert().values(
+                        student_id=student_record.id,
+                        subject_id=subject_record.id,
+                        grade=grade
+                    ))
 
     db.session.add_all(houses)
     db.session.add_all(wands)
