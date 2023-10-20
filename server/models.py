@@ -1,14 +1,26 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import validates
-from sqlalchemy import Table, Column, Integer, ForeignKey, ForeignKeyConstraint, CheckConstraint
+from sqlalchemy import Table, Column, Integer, ForeignKey, ForeignKeyConstraint, CheckConstraint, Enum
 from config import db
+
+
+grades_enum = Enum(
+    'Outstanding',
+    'Exceeds Expectations',
+    'Acceptable',
+    'Poor',
+    'Dreadful',
+    'Troll',
+    name='grades_enum'
+)
+
 
 student_subject_association = db.Table(
     'student_subject_association',
     db.Column('student_id', db.Integer, db.ForeignKey('students.id')),
     db.Column('subject_id', db.Integer, db.ForeignKey('subjects.id')),
-    db.Column('grade', db.String(1))
+    db.Column('grade', grades_enum)
 )
 
 
