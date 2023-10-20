@@ -6,9 +6,6 @@ import Button from "react-bootstrap/Button";
 
 function StudentList() {
   // Sample student data (you can fetch this from your API)
-  const sampleStudents = [
-    // Sample student data
-  ];
 
   //Grabbing student info from API
   const [students, setStudents] = useState([]);
@@ -45,7 +42,7 @@ function StudentList() {
 
   // State for search filter
   const [searchTerm, setSearchTerm] = useState("");
-  const filteredStudents = sampleStudents.filter((student) =>
+  const filteredStudents = students.filter((student) =>
     student.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -61,7 +58,7 @@ function StudentList() {
       <div className="students-container">
         <h2>Students on Campus</h2>
         <div className="students-info">
-          {students.map((student, index) => (
+          {filteredStudents.map((student, index) => (
             <div key={index} className="student-info-card">
               <p>Name: {student.name}</p>
               <p>House: {student.house ? student.house.name : "Unknown"}</p>
@@ -75,27 +72,12 @@ function StudentList() {
                   <p>Pet Species: {student.pet.type}</p>
                 </div>
               )}
+              <button onClick={() => handleDeleteStudent(student.id)}>
+                Delete
+              </button>
             </div>
           ))}
         </div>
-      </div>
-      <div className="student-list">
-        {filteredStudents.map((student) => (
-          <div className="student-card" key={student.id}>
-            <div className={`house-crest ${student.house.toLowerCase()}`}>
-              {/* House Crest */}
-            </div>
-            <div className="student-details">
-              <img
-                src={student.profilePicture}
-                alt={`${student.name}'s profile`}
-              />
-              <h2>{student.name}</h2>
-              <p>House: {student.house}</p>
-              <button>Details</button>
-            </div>
-          </div>
-        ))}
       </div>
       <div className="about">
         <h2>About</h2>

@@ -91,7 +91,7 @@ with app.app_context():
     # s5.subjects = [charms, hom, dada, herb, astro]
     s6 = Student(name="Cedric Diggory", house=hufflepuff,  wand=w6)
     # s6.subjects = [fly, charms, dada, transfig]
-
+    
     students = [s1, s2, s3, s4, s5]
 
     db.session.add_all(houses)

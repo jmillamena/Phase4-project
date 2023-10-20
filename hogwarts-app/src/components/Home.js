@@ -70,7 +70,7 @@ function Home() {
 
       
 
-      <h2 className="hpl">House Points Leaderboard</h2>
+      <h2 className="hpl"></h2>
       <div className="housecardcontainer">
       {houses.map((house, index) => (
       <HouseCard key={index} {...house} />
