@@ -64,6 +64,7 @@ function HogwartsHouse() {
           <div key={house.id}>
             <p
               onClick={() => handleHouseClick(house)}
+              className="house-name"
               style={{ cursor: "pointer" }}
             >
               {house.name}
