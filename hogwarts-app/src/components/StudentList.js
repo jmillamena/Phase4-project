@@ -6,9 +6,6 @@ import Button from "react-bootstrap/Button";
 
 function StudentList() {
   // Sample student data (you can fetch this from your API)
-  const sampleStudents = [
-    // Sample student data
-  ];
 
   //Grabbing student info from API
   const [students, setStudents] = useState([]);
@@ -45,7 +42,7 @@ function StudentList() {
 
   // State for search filter
   const [searchTerm, setSearchTerm] = useState("");
-  const filteredStudents = sampleStudents.filter((student) =>
+  const filteredStudents = students.filter((student) =>
     student.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
