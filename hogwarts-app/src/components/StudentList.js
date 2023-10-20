@@ -98,7 +98,7 @@ function StudentList() {
             petName: "",
             petSpecies: "",
           }}
-          onSubmit={async (values) => {
+          onSubmit={async (values, { resetForm }) => {
             const response = await fetch("http://127.0.0.1:5555/students", {
               method: "POST",
               headers: {
@@ -120,6 +120,7 @@ function StudentList() {
             if (response.status === 201) {
               // Handle successful registration
               alert("Registration successful!");
+              resetForm();
             } else {
               // Handle errors
               alert(data.message || "Registration failed.");
