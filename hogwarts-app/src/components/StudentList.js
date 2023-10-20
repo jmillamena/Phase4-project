@@ -33,14 +33,12 @@ function StudentList() {
   return (
     <div className="container">
       <h1>Number of Students: {filteredStudents.length}</h1>
-
       <input
         type="text"
         placeholder="Search Students"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-
       <div className="students-container">
         <h2>Students on Campus</h2>
         <div className="students-info">
@@ -62,7 +60,6 @@ function StudentList() {
           ))}
         </div>
       </div>
-
       <div className="student-list">
         {filteredStudents.map((student) => (
           <div className="student-card" key={student.id}>
@@ -81,7 +78,6 @@ function StudentList() {
           </div>
         ))}
       </div>
-
       <div className="about">
         <h2>About</h2>
         <p>Sample text about the Student List page and its functions.</p>
@@ -128,104 +124,116 @@ function StudentList() {
             }
           }}
         >
-          <Form className="form-border">
-            <br />
-            {({ values, handleChange, handleBlur, handleSubmit }) => (
-              <form className="form-border" onSubmit={handleSubmit}>
-                <label htmlFor="name">Name: </label>
-                <input
-                  id="name"
-                  name="name"
-                  placeholder="Enter name..."
-                  value={values.name}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                <br />
-                <br />
-                <label htmlFor="house">House: </label>
-                <Field
-                  as="select"
-                  name="house"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                >
-                  <option value="" label="Select a House" />
-                  <option value="Gryffindor">Gryffindor</option>
-                  <option value="Hufflepuff">Hufflepuff</option>
-                  <option value="Ravenclaw">Ravenclaw</option>
-                  <option value="Slytherin">Slytherin</option>
-                </Field>
-                <br />
-                <br />
-                <label htmlFor="wand">Wand</label>
-                <br />
-                <label htmlFor="wood">Wood: </label>
-                <input
-                  id="wood"
-                  name="wood"
-                  placeholder="Enter wood type..."
-                  value={values.wood}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                <br />
-                <label htmlFor="core">Core: </label>
-                <Field
-                  as="select"
-                  name="core"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                >
-                  <option value="" label="Select a Core" />
-                  <option value="Unicorn Hair">Unicorn Hair</option>
-                  <option value="Dragon Heartstring">Dragon Heartstring</option>
-                  <option value="Phoenix Feather">Phoenix Feather</option>
-                </Field>
-                <br />
-                <label htmlFor="length">Length: </label>
-                <input
-                  id="length"
-                  name="length"
-                  placeholder="Enter wand length..."
-                  value={values.length}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                <br />
-                <br />
-                <label htmlFor="pet">Pet</label>
-                <br />
-                <label htmlFor="petName">Name: </label>
-                <input
-                  id="petName"
-                  name="petName"
-                  placeholder="Insert pet name here."
-                  value={values.petName}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                <br />
-                <label htmlFor="petSpecies">Species: </label>
-                <Field
-                  as="select"
-                  name="petSpecies"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                >
-                  <option value="" label="Select a Pet" />
-                  <option value="Owl">Owl</option>
-                  <option value="Cat">Cat</option>
-                  <option value="Toad">Toad</option>
-                </Field>
-                <br />
-                <br />
-                <Button variant="primary" type="submit" className="form-button">
-                  Register
-                </Button>
-              </form>
-            )}
-          </Form>
+          {({ values, handleChange, handleBlur, handleSubmit }) => (
+            <Form className="form-border">
+              <label htmlFor="name" className="form-labels">
+                Name:{" "}
+              </label>
+              <br />
+              <input
+                id="name"
+                name="name"
+                placeholder="Enter name..."
+                value={values.name}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <br />
+              <br />
+              <label htmlFor="house" className="form-labels">
+                House:{" "}
+              </label>
+              <br />
+              <Field
+                as="select"
+                name="house"
+                onChange={handleChange}
+                onBlur={handleBlur}
+              >
+                <option value="" label="Select a House" />
+                <option value="Gryffindor">Gryffindor</option>
+                <option value="Hufflepuff">Hufflepuff</option>
+                <option value="Ravenclaw">Ravenclaw</option>
+                <option value="Slytherin">Slytherin</option>
+              </Field>
+              <br />
+              <br />
+              <label htmlFor="wand" className="form-labels">
+                Wand
+              </label>
+              <br />
+              <label htmlFor="wood">Wood: </label>
+              <br />
+              <input
+                id="wood"
+                name="wood"
+                placeholder="Enter wood type..."
+                value={values.wood}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <br />
+              <label htmlFor="core">Core: </label>
+              <br />
+              <Field
+                as="select"
+                name="core"
+                onChange={handleChange}
+                onBlur={handleBlur}
+              >
+                <option value="" label="Select a Core" />
+                <option value="Unicorn Hair">Unicorn Hair</option>
+                <option value="Dragon Heartstring">Dragon Heartstring</option>
+                <option value="Phoenix Feather">Phoenix Feather</option>
+              </Field>
+              <br />
+              <label htmlFor="length">Length: </label>
+              <br />
+              <input
+                id="length"
+                name="length"
+                placeholder="Enter wand length..."
+                value={values.length}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <br />
+              <br />
+              <label htmlFor="pet" className="form-labels">
+                Pet
+              </label>
+              <br />
+              <label htmlFor="petName">Name: </label>
+              <br />
+              <input
+                id="petName"
+                name="petName"
+                placeholder="Enter pet name..."
+                value={values.petName}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <br />
+              <label htmlFor="petSpecies">Species: </label>
+              <br />
+              <Field
+                as="select"
+                name="petSpecies"
+                onChange={handleChange}
+                onBlur={handleBlur}
+              >
+                <option value="" label="Select a Pet" />
+                <option value="Owl">Owl</option>
+                <option value="Cat">Cat</option>
+                <option value="Toad">Toad</option>
+              </Field>
+              <br />
+              <br />
+              <Button variant="primary" type="submit" className="form-button">
+                Register
+              </Button>
+            </Form>
+          )}
         </Formik>
       </div>
     </div>

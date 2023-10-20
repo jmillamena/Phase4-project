@@ -11,3 +11,15 @@
   padding: 10px;
   border: 1px solid #ddd;
 }
+
+.new-student-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-labels {
+  font-weight: bold;
+  font-size: 20px;
+}
