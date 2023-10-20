@@ -79,8 +79,8 @@ function StudentList() {
       />
 
       <div className="about">
-        <h2>About</h2>
-        <p>
+        <h2 className="heading-about">About</h2>
+        <p className="about-house">
           Welcome to the Hogwarts Students List In the hallowed halls of
           Hogwarts School of Witchcraft and Wizardry, young witches and wizards
           from all corners of the wizarding world come together to embark on a
@@ -130,7 +130,7 @@ function StudentList() {
       </div>
 
       <div className="new-student-form">
-        <h1>Student Registry</h1>
+        <h1 className="heading-about">Student Registry</h1>
         <Formik
           initialValues={{
             name: "",

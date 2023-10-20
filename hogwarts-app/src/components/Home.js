@@ -16,13 +16,13 @@ function Home() {
     },
     {
       name: "Hufflepuff",
-      emblem: "/path/to/hufflepuff.png",
+      emblem: "https://cdn11.bigcommerce.com/s-ydriczk/products/88364/images/91134/Harry-Potter-Hufflepuff-Crest-Official-wall-mounted-cardboard-cutout-buy-now-at-star__21122.1507644096.450.659.jpg?c=2",
       founder: "Helga Hufflepuff",
       traits: ["Hard work", "Loyalty", "Fair play"],
     },
     {
       name: "Ravenclaw",
-      emblem: "/path/to/ravenclaw.png",
+      emblem: "https://i.pinimg.com/1200x/b1/52/d8/b152d8c930aeb6412dd3b44081cccb80.jpg",
       founder: "Rowena Ravenclaw",
       traits: ["Intelligence", "Wit", "Wisdom"],
     },
@@ -64,13 +64,14 @@ function Home() {
       
 
       <h2 className="title-ue">Upcoming Events</h2>
+      <div className="eventcards">
       {upcomingEvents.map((event, index) => (
         <EventCard key={index} {...event} />
       ))}
-
+</div>
       
 
-      <h2 className="hpl">House Points Leaderboard</h2>
+      <h2 className="hpl"></h2>
       <div className="housecardcontainer">
       {houses.map((house, index) => (
       <HouseCard key={index} {...house} />

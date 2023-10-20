@@ -23,7 +23,7 @@ function Navbar() {
             <Link to="/magical-creatures">Magical Creatures</Link>
           </li>
           <li>
-            <Link to="/wands">Wands</Link>
+            {/* <Link to="/wands">Wands</Link> */}
           </li>
         </ul>
       </div>
