@@ -32,6 +32,41 @@ class Students(Resource):
                     for student in Student.query.all()]
         return make_response(students, 200)
 
+    def post(self):
+        student_data = request.get_json()
+        try:
+            # Create a new House instance and add it to the database
+            new_house = House(name=student_data["house"])
+            db.session.add(new_house)
+
+            # Create a new Pet instance and add it to the database
+            new_pet = Pet(
+                name=student_data["petName"],
+                type=student_data["petSpecies"]
+            )
+            db.session.add(new_pet)
+
+            # Create a new Wand instance and add it to the database
+            new_wand = Wand(
+                wood=student_data["wood"],
+                core=student_data["core"],
+                length=student_data["length"]
+            )
+            db.session.add(new_wand)
+
+            # Create a new Student instance and associate it with House, Pet, and Wand
+            new_student_data = Student(
+                name=student_data["name"],
+                house=new_house,
+                pet=new_pet,
+                wand=new_wand
+            )
+            db.session.add(new_student_data)
+            db.session.commit()
+            return make_response(new_student_data.to_dict(), 201)
+        except ValueError as e:
+            return make_response({"errors": ["validations"]}, 400)
+
 
 api.add_resource(Students, '/students')
 
@@ -41,6 +76,16 @@ class Pets(Resource):
         pets = [pet.to_dict() for pet in Pet.query.all()]
         return make_response(pets, 200)
 
+    def post(self):
+        pet_data = request.get_json()
+        try:
+            new_pet_data = Pet(**pet_data)
+        except ValueError as e:
+            return make_response({"errors": ["validations"]}, 400)
+        db.session.add(new_pet_data)
+        db.session.commit()
+        return make_response(new_pet_data.to_dict(), 200)
+
 
 api.add_resource(Pets, '/pets')
 
@@ -49,6 +94,16 @@ class Wands(Resource):
     def get(self):
         wands = [wand.to_dict() for wand in Wand.query.all()]
         return make_response(wands, 200)
+
+    def post(self):
+        wand_data = request.get_json()
+        try:
+            new_wand_data = Wand(**wand_data)
+        except ValueError as e:
+            return make_response({"errors": ["validations"]}, 400)
+        db.session.add(new_wand_data)
+        db.session.commit()
+        return make_response(new_wand_data.to_dict(), 200)
 
 
 api.add_resource(Wands, '/wands')
@@ -60,6 +115,14 @@ class StudentById(Resource):
         if not student:
             return make_response({"errors": "Student not found."})
         return make_response(student.to_dict(), 200)
+
+    def delete(self, id):
+        student = Student.query.get(id)
+        if not student:
+            return make_response({"error": "Student not found."})
+        db.session.delete(student)
+        db.session.commit()
+        return ("", 204)
 
 
 api.add_resource(StudentById, '/students/<int:id>')

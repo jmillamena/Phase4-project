@@ -1,6 +1,7 @@
 // src/components/StudentList.js
 import React, { useState, useEffect } from "react";
 import "../App.css";
+import { Formik, Field, Form } from "formik";
 
 function StudentList() {
   // Sample student data (you can fetch this from your API)
@@ -86,28 +87,139 @@ function StudentList() {
       </div>
 
       <div className="new-student-form">
-        <h2>New Student Registry</h2>
-        <form>
-          <input type="text" placeholder="Name" />
+        <h1>Student Registry</h1>
+        <Formik
+          initialValues={{
+            name: "",
+            house: "",
+            wood: "",
+            core: "",
+            length: "",
+            petName: "",
+            petSpecies: "",
+          }}
+          onSubmit={async (values, { resetForm }) => {
+            const response = await fetch("http://127.0.0.1:5555/students", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                name: values.name,
+                house: values.house,
+                wood: values.wood,
+                core: values.core,
+                length: values.length,
+                petName: values.petName,
+                petSpecies: values.petSpecies,
+              }),
+            });
 
-          <select>
-            <option value="Gryffindor">Gryffindor</option>
-            <option value="Hufflepuff">Hufflepuff</option>
-            <option value="Ravenclaw">Ravenclaw</option>
-            <option value="Slytherin">Slytherin</option>
-          </select>
-          <textarea placeholder="About Me"></textarea>
-          <div className="wand-fields">
-            <input type="text" placeholder="Wood" />
-            <input type="text" placeholder="Core" />
-            <input type="text" placeholder="Length" />
-          </div>
-          <div className="pet-fields">
-            <input type="text" placeholder="Name" />
-            <input type="text" placeholder="Species" />
-          </div>
-          <button>Add Student</button>
-        </form>
+            const data = await response.json();
+
+            if (response.status === 201) {
+              // Handle successful registration
+              alert("Registration successful!");
+              resetForm();
+            } else {
+              // Handle errors
+              alert(data.message || "Registration failed.");
+            }
+          }}
+        >
+          {({ values, handleChange, handleBlur, handleSubmit }) => (
+            <form className="form-border" onSubmit={handleSubmit}>
+              <label htmlFor="name">Name: </label>
+              <input
+                id="name"
+                name="name"
+                placeholder="Enter name..."
+                value={values.name}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <br />
+              <br />
+              <label htmlFor="house">House: </label>
+              <Field
+                as="select"
+                name="house"
+                onChange={handleChange}
+                onBlur={handleBlur}
+              >
+                <option value="" label="Select a House" />
+                <option value="Gryffindor">Gryffindor</option>
+                <option value="Hufflepuff">Hufflepuff</option>
+                <option value="Ravenclaw">Ravenclaw</option>
+                <option value="Slytherin">Slytherin</option>
+              </Field>
+              <br />
+              <br />
+              <label htmlFor="wand">Wand</label>
+              <br />
+              <label htmlFor="wood">Wood: </label>
+              <input
+                id="wood"
+                name="wood"
+                placeholder="Enter wood type..."
+                value={values.wood}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <br />
+              <label htmlFor="core">Core: </label>
+              <Field
+                as="select"
+                name="core"
+                onChange={handleChange}
+                onBlur={handleBlur}
+              >
+                <option value="" label="Select a Core" />
+                <option value="Unicorn Hair">Unicorn Hair</option>
+                <option value="Dragon Heartstring">Dragon Heartstring</option>
+                <option value="Phoenix Feather">Phoenix Feather</option>
+              </Field>
+              <br />
+              <label htmlFor="length">Length: </label>
+              <input
+                id="length"
+                name="length"
+                placeholder="Enter wand length..."
+                value={values.length}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <br />
+              <br />
+              <label htmlFor="pet">Pet</label>
+              <br />
+              <label htmlFor="petName">Name: </label>
+              <input
+                id="petName"
+                name="petName"
+                placeholder="Insert pet name here."
+                value={values.petName}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <br />
+              <label htmlFor="petSpecies">Species: </label>
+              <Field
+                as="select"
+                name="petSpecies"
+                onChange={handleChange}
+                onBlur={handleBlur}
+              >
+                <option value="" label="Select a Pet" />
+                <option value="Owl">Owl</option>
+                <option value="Cat">Cat</option>
+                <option value="Toad">Toad</option>
+              </Field>
+              <br />
+              <button type="submit">Submit</button>
+            </form>
+          )}
+        </Formik>
       </div>
     </div>
   );
